@@ -1,7 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
+import 'package:flutter_todo_list_app/features/todo/widgets/task_tile.dart';
+import 'package:flutter_todo_list_app/features/todo/data/enums/todo_status.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -30,51 +30,20 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ListView(
         children: <Widget>[
-          ListTile(
-            title: const Text('Task 1'),
-            subtitle: const Text('Description of Task 1'),
-            leading: const Icon(Icons.pending_actions),
-            trailing: PopupMenuButton(
-              onSelected: (value) {
-                setState(() {
-                  print(value);
-                });
-              },
-              itemBuilder: (BuildContext context) =>  <PopupMenuEntry>[
-                const PopupMenuItem(
-                  value: 'edit',
-                  child: Row(
-                    spacing: 10,
-                    children: <Widget>[
-                      Icon(Icons.edit),
-                      Text('Edit'),
-                    ],  
-                  )
-                ),
-                const PopupMenuItem(
-                  value: 'delete',
-                  child: Row(
-                    spacing: 10,
-                    children: <Widget>[
-                      Icon(Icons.delete),
-                      Text('Delete'),
-                    ],  
-                  )
-                ),
-              ],
-            )
+          TaskTile(
+            title: 'Task 1',
+            subtitle: 'Description 1',
+            status: Todostatus.pending,
           ),
-          Divider(),
-          ListTile(
-            title: const Text('Task 2'),
-            subtitle: const Text('Description of Task 2'),
-            leading: const Icon(Icons.pending_outlined),
+          TaskTile(
+            title: 'Task 2',
+            subtitle: 'Description 2',
+            status: Todostatus.inProgress,
           ),
-          Divider(),
-          ListTile(
-            title: const Text('Task 3'),
-            subtitle: const Text('Description of Task 3'),
-            leading: const Icon(Icons.task_alt),
+          TaskTile(
+            title: 'Task 3',
+            subtitle: 'Description 3',
+            status: Todostatus.completed,
           ),
         ],
       ),
@@ -85,13 +54,12 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       bottomNavigationBar: _DemoBottomAppBar(
-          fabLocation: FloatingActionButtonLocation.endDocked,
-          shape: null,
+        fabLocation: FloatingActionButtonLocation.endDocked,
+        shape: null,
       ),
     );
   }
 }
-
 
 class _DemoBottomAppBar extends StatelessWidget {
   const _DemoBottomAppBar({
@@ -102,10 +70,11 @@ class _DemoBottomAppBar extends StatelessWidget {
   final FloatingActionButtonLocation fabLocation;
   final NotchedShape? shape;
 
-  static final List<FloatingActionButtonLocation> centerLocations = <FloatingActionButtonLocation>[
-    FloatingActionButtonLocation.centerDocked,
-    FloatingActionButtonLocation.centerFloat,
-  ];
+  static final List<FloatingActionButtonLocation> centerLocations =
+      <FloatingActionButtonLocation>[
+        FloatingActionButtonLocation.centerDocked,
+        FloatingActionButtonLocation.centerFloat,
+      ];
 
   @override
   Widget build(BuildContext context) {
@@ -116,11 +85,27 @@ class _DemoBottomAppBar extends StatelessWidget {
         data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
         child: Row(
           children: <Widget>[
-            IconButton(tooltip: 'Open navigation menu', icon: const Icon(Icons.menu, color: AppColors.black,), onPressed: () {},),
+            IconButton(
+              tooltip: 'Open navigation menu',
+              icon: const Icon(Icons.menu, color: AppColors.black),
+              onPressed: () {},
+            ),
             if (centerLocations.contains(fabLocation)) const Spacer(),
-            IconButton(tooltip: 'Pending Tasks', icon: const Icon(Icons.pending_actions, color: AppColors.black), onPressed: () {}),
-            IconButton(tooltip: 'In Process', icon: const Icon(Icons.pending_outlined, color: AppColors.black), onPressed: () {}),
-            IconButton(tooltip: 'Done Tasks', icon: const Icon(Icons.task_alt, color: AppColors.black), onPressed: () {}),
+            IconButton(
+              tooltip: 'Pending Tasks',
+              icon: const Icon(Icons.pending_actions, color: AppColors.black),
+              onPressed: () {},
+            ),
+            IconButton(
+              tooltip: 'In Process',
+              icon: const Icon(Icons.pending_outlined, color: AppColors.black),
+              onPressed: () {},
+            ),
+            IconButton(
+              tooltip: 'Done Tasks',
+              icon: const Icon(Icons.task_alt, color: AppColors.black),
+              onPressed: () {},
+            ),
           ],
         ),
       ),
