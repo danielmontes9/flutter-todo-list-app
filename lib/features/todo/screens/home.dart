@@ -28,17 +28,55 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: AppColors.secondary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+      body: ListView(
+        children: <Widget>[
+          ListTile(
+            title: const Text('Task 1'),
+            subtitle: const Text('Description of Task 1'),
+            leading: const Icon(Icons.pending_actions),
+            trailing: PopupMenuButton(
+              onSelected: (value) {
+                setState(() {
+                  print(value);
+                });
+              },
+              itemBuilder: (BuildContext context) =>  <PopupMenuEntry>[
+                const PopupMenuItem(
+                  value: 'edit',
+                  child: Row(
+                    spacing: 10,
+                    children: <Widget>[
+                      Icon(Icons.edit),
+                      Text('Edit'),
+                    ],  
+                  )
+                ),
+                const PopupMenuItem(
+                  value: 'delete',
+                  child: Row(
+                    spacing: 10,
+                    children: <Widget>[
+                      Icon(Icons.delete),
+                      Text('Delete'),
+                    ],  
+                  )
+                ),
+              ],
+            )
+          ),
+          Divider(),
+          ListTile(
+            title: const Text('Task 2'),
+            subtitle: const Text('Description of Task 2'),
+            leading: const Icon(Icons.pending_outlined),
+          ),
+          Divider(),
+          ListTile(
+            title: const Text('Task 3'),
+            subtitle: const Text('Description of Task 3'),
+            leading: const Icon(Icons.task_alt),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
