@@ -30,8 +30,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.secondary,
-        title: Text(widget.title),
+        backgroundColor: AppColors.primary,
+        title: Text(
+          widget.title,
+          style: const TextStyle(color: AppColors.white),
+        ),
       ),
       body: ListView(
         children: <Widget>[
@@ -53,6 +56,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.secondary,
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
@@ -85,30 +89,30 @@ class _DemoBottomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomAppBar(
       shape: shape,
-      color: AppColors.secondary,
+      color: AppColors.primary,
       child: IconTheme(
         data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
         child: Row(
           children: <Widget>[
             IconButton(
               tooltip: 'Open navigation menu',
-              icon: const Icon(Icons.menu, color: AppColors.black),
+              icon: const Icon(Icons.menu, color: AppColors.white),
               onPressed: () {},
             ),
             if (centerLocations.contains(fabLocation)) const Spacer(),
             IconButton(
               tooltip: 'Pending Tasks',
-              icon: const Icon(Icons.pending_actions, color: AppColors.black),
+              icon: const Icon(Icons.pending_actions, color: AppColors.white),
               onPressed: () {},
             ),
             IconButton(
               tooltip: 'In Process',
-              icon: const Icon(Icons.pending_outlined, color: AppColors.black),
+              icon: const Icon(Icons.pending_outlined, color: AppColors.white),
               onPressed: () {},
             ),
             IconButton(
               tooltip: 'Done Tasks',
-              icon: const Icon(Icons.task_alt, color: AppColors.black),
+              icon: const Icon(Icons.task_alt, color: AppColors.white),
               onPressed: () {},
             ),
           ],

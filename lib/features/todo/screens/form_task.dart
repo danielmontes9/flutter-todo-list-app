@@ -16,8 +16,11 @@ class _FormTaskPagePageState extends State<FormTaskPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.secondary,
-        title: Text(widget.title),
+        backgroundColor: AppColors.primary,
+        title: Text(
+          widget.title,
+          style: const TextStyle(color: AppColors.white),
+        ),
       ),
       body: Center(
         child: Column(
