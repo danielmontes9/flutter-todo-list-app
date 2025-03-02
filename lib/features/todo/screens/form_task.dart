@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
+import 'package:flutter_todo_list_app/features/todo/widgets/custom_text_field.dart';
 
 class FormTaskPage extends StatefulWidget {
   final String title;
@@ -22,15 +23,8 @@ class _FormTaskPagePageState extends State<FormTaskPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const SizedBox(
-              width: 250,
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Title',
-                ),
-              ),
-            ),
+            CustomTextField(label: 'Task Name'),
+            CustomTextField(label: 'Description'),
           ],
         ),
       ),
