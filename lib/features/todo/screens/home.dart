@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
+import 'package:flutter_todo_list_app/features/todo/screens/form_task.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/task_tile.dart';
 import 'package:flutter_todo_list_app/features/todo/data/enums/todo_status.dart';
 
@@ -17,7 +18,11 @@ class _HomePageState extends State<HomePage> {
 
   void _incrementCounter() {
     setState(() {
-      _counter++;
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const FormTaskPage(title: 'Add Task'),
+        ),
+      );
     });
   }
 
