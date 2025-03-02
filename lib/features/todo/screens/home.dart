@@ -28,6 +28,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primary,
@@ -43,10 +45,20 @@ class _HomePageState extends State<HomePage> {
             subtitle: 'Description 1',
             status: Todostatus.pending,
           ),
+          Divider(
+            indent: screenWidth * 0.05,
+            endIndent: screenWidth * 0.05,
+            color: AppColors.disabled,
+          ),
           TaskTile(
             title: 'Task 2',
             subtitle: 'Description 2',
             status: Todostatus.inProgress,
+          ),
+          Divider(
+            indent: screenWidth * 0.05,
+            endIndent: screenWidth * 0.05,
+            color: AppColors.disabled,
           ),
           TaskTile(
             title: 'Task 3',
