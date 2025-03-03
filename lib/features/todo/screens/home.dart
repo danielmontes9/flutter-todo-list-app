@@ -64,7 +64,10 @@ class HomePageState extends State<HomePage> {
     return Scaffold(
       key: _scaffoldKey, // Asigna la key al Scaffold
       appBar: CustomAppBar(title: 'Todo List App', scaffoldKey: _scaffoldKey),
-      drawer: CustomAppDrawer(),
+      drawer: CustomAppDrawer(
+        screenIndex: screenIndex,
+        handleScreenChanged: _onDestinationSelected,
+      ),
       body: TaskList(taskTab: screenIndex),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.secondary,
