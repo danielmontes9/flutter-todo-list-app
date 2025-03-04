@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todo_list_app/core/blocs/theme/theme_bloc.dart';
 import 'package:flutter_todo_list_app/core/blocs/theme/theme_state.dart';
-import 'package:flutter_todo_list_app/core/theme/theme.dart';
 import 'package:flutter_todo_list_app/features/todo/screens/home.dart';
 
 void main() {

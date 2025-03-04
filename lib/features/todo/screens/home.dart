@@ -14,20 +14,16 @@ class HomeTab {
 }
 
 const List<HomeTab> destinations = <HomeTab>[
-  HomeTab(
-    'All',
-    Icon(Icons.widgets_outlined, color: AppColors.black),
-    Icon(Icons.widgets, color: AppColors.black),
-  ),
+  HomeTab('All', Icon(Icons.widgets_outlined), Icon(Icons.widgets)),
   HomeTab(
     'Pending Tasks',
-    Icon(Icons.pending_actions_outlined, color: AppColors.black),
-    Icon(Icons.pending_actions, color: AppColors.black),
+    Icon(Icons.pending_actions_outlined),
+    Icon(Icons.pending_actions),
   ),
   HomeTab(
     'Completed Tasks',
-    Icon(Icons.task_alt_outlined, color: AppColors.black),
-    Icon(Icons.task_alt, color: AppColors.black),
+    Icon(Icons.task_alt_outlined),
+    Icon(Icons.task_alt),
   ),
 ];
 

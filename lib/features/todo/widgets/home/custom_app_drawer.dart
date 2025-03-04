@@ -19,7 +19,6 @@ class CustomAppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NavigationDrawer(
-      backgroundColor: AppColors.backgroundLigth,
       indicatorColor: AppColors.primaryAccent,
       onDestinationSelected: handleScreenChanged,
       selectedIndex: screenIndex,
