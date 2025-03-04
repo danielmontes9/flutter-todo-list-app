@@ -24,13 +24,29 @@ class _FormTaskPagePageState extends State<FormTaskPage> {
           style: const TextStyle(color: AppColors.white),
         ),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(24.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             CustomTextField(label: 'Task Name'),
-            CustomTextArea(label: 'Description'),
+            SizedBox(height: 28),
             CustomDatePicker(label: 'Due Date'),
+            SizedBox(height: 28),
+            CustomTextArea(label: 'Description'),
+            SizedBox(height: 28),
+            FilledButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                shape: WidgetStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+              child: Text('Save'),
+            ),
           ],
         ),
       ),

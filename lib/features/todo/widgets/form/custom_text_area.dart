@@ -8,7 +8,7 @@ class CustomTextArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 250,
+      width: double.infinity,
       height: 120,
       child: TextField(
         maxLines: null,
