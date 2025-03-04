@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CustomDatePicker extends StatefulWidget {
   final String label;
@@ -23,8 +24,10 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
 
     setState(() {
       selectedDate = pickedDate;
-      // _controller.text = DateFormat.yMMMd().format(pickedDate);
-      _controller.text = pickedDate.toString();
+
+      if (pickedDate == null) return;
+
+      _controller.text = DateFormat.yMMMd().format(pickedDate);
     });
   }
 
