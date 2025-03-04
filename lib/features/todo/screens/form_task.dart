@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/form/custom_date_picker.dart';
+import 'package:flutter_todo_list_app/features/todo/widgets/form/custom_filled_button.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/form/custom_text_area.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/form/custom_text_field.dart';
 
@@ -14,6 +15,8 @@ class FormTaskPage extends StatefulWidget {
 }
 
 class _FormTaskPagePageState extends State<FormTaskPage> {
+  void _saveTask() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,17 +39,7 @@ class _FormTaskPagePageState extends State<FormTaskPage> {
             SizedBox(height: 28),
             CustomTextArea(label: 'Description'),
             SizedBox(height: 28),
-            FilledButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                shape: WidgetStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ),
-              child: Text('Save'),
-            ),
+            CustomFilledButton(label: 'Save', onPressed: _saveTask),
           ],
         ),
       ),
