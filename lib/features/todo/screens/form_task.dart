@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
+import 'package:flutter_todo_list_app/features/todo/widgets/form/custom_text_area.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/form/custom_text_field.dart';
 
 class FormTaskPage extends StatefulWidget {
@@ -27,7 +28,7 @@ class _FormTaskPagePageState extends State<FormTaskPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             CustomTextField(label: 'Task Name'),
-            CustomTextField(label: 'Description'),
+            CustomTextArea(label: 'Description'),
           ],
         ),
       ),
