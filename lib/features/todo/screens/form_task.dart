@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
+import 'package:flutter_todo_list_app/features/todo/widgets/form/custom_date_picker.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/form/custom_text_area.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/form/custom_text_field.dart';
 
@@ -29,6 +30,7 @@ class _FormTaskPagePageState extends State<FormTaskPage> {
           children: <Widget>[
             CustomTextField(label: 'Task Name'),
             CustomTextArea(label: 'Description'),
+            CustomDatePicker(label: 'Due Date'),
           ],
         ),
       ),
