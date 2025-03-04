@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todo_list_app/core/blocs/theme/theme_bloc.dart';
+import 'package:flutter_todo_list_app/core/blocs/theme/theme_event.dart';
 import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
+import 'package:flutter_todo_list_app/core/theme/theme.dart';
 import 'package:flutter_todo_list_app/features/todo/screens/home.dart';
 
 class CustomAppDrawer extends StatelessWidget {
@@ -63,7 +67,14 @@ class CustomAppDrawer extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 14),
           child: ListTile(
             title: Text('Dark Mode'),
-            trailing: Switch(value: false, onChanged: (value) {}),
+            trailing: Switch(
+              value:
+                  context.read<ThemeBloc>().state.themeData ==
+                  AppTheme.darkTheme,
+              onChanged: (value) {
+                context.read<ThemeBloc>().add(ToggleThemeEvent());
+              },
+            ),
           ),
         ),
       ],
