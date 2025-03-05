@@ -37,6 +37,7 @@ dependencies:
   logger: ^2.5.0
   path: ^1.9.1
   sqflite: ^2.4.2
+  sqflite_common_ffi_web: ^1.0.0
 
 dev_dependencies:
   commitlint_cli: ^0.8.1
