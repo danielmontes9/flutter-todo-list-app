@@ -29,7 +29,7 @@ class _TaskTileState extends State<TaskTile> {
           // widget.leading
           widget.status == Todostatus.pending
               ? const Icon(Icons.pending_actions, color: AppColors.warning)
-              : widget.status == Todostatus.inProgress
+              : widget.status == Todostatus.archived
               ? const Icon(Icons.pending_outlined, color: AppColors.info)
               : const Icon(Icons.task_alt, color: AppColors.success)),
       trailing: PopupMenuButton(
