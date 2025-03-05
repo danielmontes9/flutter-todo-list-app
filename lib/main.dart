@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todo_list_app/core/blocs/task/task_bloc.dart';
 import 'package:flutter_todo_list_app/core/blocs/theme/theme_bloc.dart';
 import 'package:flutter_todo_list_app/core/blocs/theme/theme_state.dart';
 import 'package:flutter_todo_list_app/features/todo/screens/home.dart';
 
 void main() {
-  runApp(BlocProvider(create: (_) => ThemeBloc(), child: const MyApp()));
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => ThemeBloc()),
+        BlocProvider(create: (_) => TaskBloc()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -16,10 +25,8 @@ class MyApp extends StatelessWidget {
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) {
         return MaterialApp(
-          title: 'Flutter Demo',
+          title: 'Flutter Todo List App',
           theme: state.themeData,
-          // darkTheme: AppTheme.darkTheme,
-          // themeMode: ThemeMode.system,
           debugShowCheckedModeBanner: false,
           home: const HomePage(),
         );
