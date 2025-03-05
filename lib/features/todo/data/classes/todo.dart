@@ -7,12 +7,13 @@ class Todo {
   final String id;
   final String title;
   final String description;
+  final String dueDate;
   final Todostatus status;
-
   Todo({
     required this.id,
     required this.title,
     required this.description,
+    required this.dueDate,
     required this.status,
   });
 
@@ -20,12 +21,14 @@ class Todo {
     String? id,
     String? title,
     String? description,
+    String? dueDate,
     Todostatus? status,
   }) {
     return Todo(
       id: id ?? this.id,
       title: title ?? this.title,
       description: description ?? this.description,
+      dueDate: dueDate ?? this.dueDate,
       status: status ?? this.status,
     );
   }
@@ -35,6 +38,7 @@ class Todo {
       'id': id,
       'title': title,
       'description': description,
+      'dueDate': dueDate,
       'status': status,
     };
   }
@@ -44,6 +48,7 @@ class Todo {
       id: map['id'] as String,
       title: map['title'] as String,
       description: map['description'] as String,
+      dueDate: map['dueDate'] as String,
       status: Todostatus.values.firstWhere(
         (element) => element.toString() == 'Todostatus.${map['status']}',
       ),
@@ -57,7 +62,7 @@ class Todo {
 
   @override
   String toString() {
-    return 'Todo(id: $id, title: $title, description: $description, status: $status)';
+    return 'Todo(id: $id, title: $title, description: $description, dueDate: $dueDate, status: $status)';
   }
 
   @override
@@ -67,6 +72,7 @@ class Todo {
     return other.id == id &&
         other.title == title &&
         other.description == description &&
+        other.dueDate == dueDate &&
         other.status == status;
   }
 
@@ -75,6 +81,7 @@ class Todo {
     return id.hashCode ^
         title.hashCode ^
         description.hashCode ^
+        dueDate.hashCode ^
         status.hashCode;
   }
 }
