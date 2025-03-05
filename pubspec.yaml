@@ -35,6 +35,7 @@ dependencies:
   flutter_bloc: ^9.1.0
   intl: ^0.20.2
   logger: ^2.5.0
+  sqflite: ^2.4.2
 
 dev_dependencies:
   commitlint_cli: ^0.8.1
