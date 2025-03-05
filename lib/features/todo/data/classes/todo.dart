@@ -4,13 +4,14 @@ import 'dart:convert';
 import 'package:flutter_todo_list_app/features/todo/data/enums/todo_status.dart';
 
 class Todo {
-  final String id;
+  final String? id;
   final String title;
   final String description;
   final String dueDate;
   final Todostatus status;
+
   Todo({
-    required this.id,
+    this.id,
     required this.title,
     required this.description,
     required this.dueDate,
