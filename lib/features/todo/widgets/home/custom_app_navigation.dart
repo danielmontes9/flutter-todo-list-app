@@ -14,20 +14,22 @@ class CustomAppNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NavigationBar(
-      selectedIndex: screenIndex,
-      onDestinationSelected: onDestinationSelected,
-      backgroundColor: AppColors.primary,
-      indicatorColor: AppColors.primaryAccent,
-      destinations:
-          navigationRouter.map((HomeTab destination) {
-            return NavigationDestination(
-              label: destination.label,
-              icon: destination.icon,
-              selectedIcon: destination.selectedIcon,
-              tooltip: destination.label,
-            );
-          }).toList(),
-    );
+    return screenIndex < navigationRouter.length
+        ? NavigationBar(
+          selectedIndex: screenIndex,
+          onDestinationSelected: onDestinationSelected,
+          backgroundColor: AppColors.primary,
+          indicatorColor: AppColors.primaryAccent,
+          destinations:
+              navigationRouter.map((HomeTab destination) {
+                return NavigationDestination(
+                  label: destination.label,
+                  icon: destination.icon,
+                  selectedIcon: destination.selectedIcon,
+                  tooltip: destination.label,
+                );
+              }).toList(),
+        )
+        : const SizedBox.shrink();
   }
 }

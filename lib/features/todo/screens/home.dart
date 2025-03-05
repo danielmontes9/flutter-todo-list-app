@@ -49,7 +49,7 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey, // Asigna la key al Scaffold
+      key: _scaffoldKey,
       appBar: CustomAppBar(title: 'Todo List App', scaffoldKey: _scaffoldKey),
       drawer: CustomAppDrawer(
         screenIndex: screenIndex,
