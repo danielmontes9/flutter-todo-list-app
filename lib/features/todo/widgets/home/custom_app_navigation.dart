@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_list_app/core/routing/home_tab.dart';
 import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
-import 'package:flutter_todo_list_app/features/todo/screens/home.dart';
 
 class CustomAppNavigation extends StatelessWidget {
   final int screenIndex;
@@ -20,7 +20,7 @@ class CustomAppNavigation extends StatelessWidget {
       backgroundColor: AppColors.primary,
       indicatorColor: AppColors.primaryAccent,
       destinations:
-          destinations.map((HomeTab destination) {
+          navigationRouter.map((HomeTab destination) {
             return NavigationDestination(
               label: destination.label,
               icon: destination.icon,

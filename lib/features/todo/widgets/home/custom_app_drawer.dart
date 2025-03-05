@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todo_list_app/core/blocs/theme/theme_bloc.dart';
 import 'package:flutter_todo_list_app/core/blocs/theme/theme_event.dart';
+import 'package:flutter_todo_list_app/core/routing/home_tab.dart';
 import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
 import 'package:flutter_todo_list_app/core/theme/theme.dart';
 import 'package:flutter_todo_list_app/features/todo/screens/home.dart';
@@ -42,7 +43,7 @@ class CustomAppDrawer extends StatelessWidget {
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
-        ...destinations.map((HomeTab destination) {
+        ...drawerRouter.map((HomeTab destination) {
           return NavigationDrawerDestination(
             label: Text(destination.label),
             icon: destination.icon,

@@ -5,28 +5,6 @@ import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_bar.
 import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_drawer.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_navigation.dart';
 
-class HomeTab {
-  const HomeTab(this.label, this.icon, this.selectedIcon);
-
-  final String label;
-  final Widget icon;
-  final Widget selectedIcon;
-}
-
-const List<HomeTab> destinations = <HomeTab>[
-  HomeTab('All', Icon(Icons.widgets_outlined), Icon(Icons.widgets)),
-  HomeTab(
-    'Pending Tasks',
-    Icon(Icons.pending_actions_outlined),
-    Icon(Icons.pending_actions),
-  ),
-  HomeTab(
-    'Completed Tasks',
-    Icon(Icons.task_alt_outlined),
-    Icon(Icons.task_alt),
-  ),
-];
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -55,6 +33,19 @@ class HomePageState extends State<HomePage> {
     });
   }
 
+  Widget _getScreen(int index) {
+    switch (index) {
+      case 0:
+        return TaskList(taskTab: index);
+      case 1:
+        return TaskList(taskTab: index);
+      case 2:
+        return TaskList(taskTab: index);
+      default:
+        return TaskList(taskTab: index);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +55,7 @@ class HomePageState extends State<HomePage> {
         screenIndex: screenIndex,
         handleScreenChanged: _onDestinationSelected,
       ),
-      body: TaskList(taskTab: screenIndex),
+      body: _getScreen(screenIndex),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.secondary,
         onPressed: _goToAddTaskScreen,
