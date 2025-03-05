@@ -44,13 +44,16 @@ class Todo {
       id: map['id'] as String,
       title: map['title'] as String,
       description: map['description'] as String,
-      status: Todostatus.values.firstWhere((element) =>  element.toString() ==  'Todostatus.${map['status']}'),
+      status: Todostatus.values.firstWhere(
+        (element) => element.toString() == 'Todostatus.${map['status']}',
+      ),
     );
   }
 
-  String toJson() =>  json.encode(toMap());
+  String toJson() => json.encode(toMap());
 
-  factory Todo.fromJson(String source) =>  Todo.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Todo.fromJson(String source) =>
+      Todo.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -58,21 +61,20 @@ class Todo {
   }
 
   @override
-  bool operator ==  (covariant Todo other) {
+  bool operator ==(covariant Todo other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id ==  id &&
-      other.title ==  title &&
-      other.description ==  description &&
-      other.status ==  status;
+
+    return other.id == id &&
+        other.title == title &&
+        other.description == description &&
+        other.status == status;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      title.hashCode ^
-      description.hashCode ^
-      status.hashCode;
+        title.hashCode ^
+        description.hashCode ^
+        status.hashCode;
   }
 }
