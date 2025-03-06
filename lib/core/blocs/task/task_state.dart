@@ -12,6 +12,15 @@ class TaskInitialState extends TaskState {}
 //* State when a task is loading
 class TaskLoadingState extends TaskState {}
 
+class TaskLoadedState extends TaskState {
+  final List<Todo> todos;
+
+  TaskLoadedState({required this.todos});
+
+  @override
+  List<Object> get props => [todos];
+}
+
 //* State when a task is added
 class TaskAddedState extends TaskState {
   final Todo todo;

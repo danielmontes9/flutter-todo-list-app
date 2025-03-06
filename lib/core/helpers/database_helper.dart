@@ -1,3 +1,4 @@
+import 'package:flutter_todo_list_app/core/helpers/database_factory.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -19,20 +20,23 @@ class DatabaseHelper {
 
   Future<Database> _initDatabase() async {
     String path = join(await getDatabasesPath(), 'tasks.db');
-    return await openDatabase(
+    print("HI! IAM HERE!");
+    return await getDatabaseFactory().openDatabase(
       path,
-      version: 1,
-      onCreate: (db, version) {
-        return db.execute('''
+      options: OpenDatabaseOptions(
+        version: 1,
+        onCreate: (db, version) {
+          return db.execute('''
           CREATE TABLE tasks (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT,
             description TEXT,
             due_date TEXT,
-            status: TEXT,
+            status TEXT
           )
         ''');
-      },
+        },
+      ),
     );
   }
 

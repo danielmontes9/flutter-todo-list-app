@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todo_list_app/core/blocs/task/task_bloc.dart';
+import 'package:flutter_todo_list_app/core/blocs/task/task_event.dart';
+import 'package:flutter_todo_list_app/core/blocs/task/task_state.dart';
+import 'package:flutter_todo_list_app/core/helpers/database_helper.dart';
 import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
+import 'package:flutter_todo_list_app/features/todo/data/enums/todo_status.dart';
 import 'package:flutter_todo_list_app/features/todo/screens/form_task.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_bar.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_drawer.dart';
@@ -17,6 +23,21 @@ class HomePageState extends State<HomePage> {
 
   int screenIndex = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    _initDatabase();
+    _fetchTasks();
+  }
+
+  Future<void> _initDatabase() async {
+    await DatabaseHelper().database;
+  }
+
+  void _fetchTasks() {
+    context.read<TaskBloc>().add(GetTasksEvent(status: Todostatus.pending));
+  }
+
   void _goToAddTaskScreen() {
     setState(() {
       Navigator.of(context).push(
@@ -30,6 +51,7 @@ class HomePageState extends State<HomePage> {
   void _onDestinationSelected(int index) {
     setState(() {
       screenIndex = index;
+      _fetchTasks();
     });
   }
 
@@ -55,7 +77,11 @@ class HomePageState extends State<HomePage> {
         screenIndex: screenIndex,
         handleScreenChanged: _onDestinationSelected,
       ),
-      body: _getScreen(screenIndex),
+      body: BlocBuilder<TaskBloc, TaskState>(
+        builder: (context, state) {
+          return _getScreen(screenIndex);
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.secondary,
         onPressed: _goToAddTaskScreen,

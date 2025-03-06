@@ -10,6 +10,15 @@ abstract class TaskEvent extends Equatable {
 
 class LoadTasksEvent extends TaskEvent {}
 
+class GetTasksEvent extends TaskEvent {
+  final Todostatus status;
+
+  const GetTasksEvent({required this.status});
+
+  @override
+  List<Object> get props => [status];
+}
+
 class AddTaskEvent extends TaskEvent {
   final String title;
   final String description;

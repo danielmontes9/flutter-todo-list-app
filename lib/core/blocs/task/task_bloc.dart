@@ -7,6 +7,7 @@ import 'package:flutter_todo_list_app/features/todo/data/enums/todo_status.dart'
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   TaskBloc() : super(TaskInitialState()) {
     on<LoadTasksEvent>(_onLoadingTasks);
+    on<GetTasksEvent>(_onGetTasks);
     on<AddTaskEvent>(_onTaskAdded);
     on<UpdateTaskEvent>(_onTaskUpdated);
     on<DeleteTaskEvent>(_onTaskDeleted);
@@ -17,6 +18,13 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     emit(TaskLoadingState());
   }
 
+  _onGetTasks(GetTasksEvent event, Emitter<TaskState> emit) {
+    emit(TaskLoadingState());
+    final tasks = <Todo>[];
+    print(tasks);
+    emit(TaskLoadedState(todos: tasks));
+  }
+
   _onTaskAdded(AddTaskEvent event, Emitter<TaskState> emit) {
     final newTask = Todo(
       title: event.title,
@@ -24,6 +32,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       dueDate: event.dueDate,
       status: event.status,
     );
+    print(newTask);
     emit(TaskAddedState(todo: newTask));
   }
 
