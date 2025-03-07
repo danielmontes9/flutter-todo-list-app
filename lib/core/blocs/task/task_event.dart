@@ -23,7 +23,7 @@ class AddTaskEvent extends TaskEvent {
   final String title;
   final String description;
   final String dueDate;
-  final TodoStatus status;
+  final String status;
 
   const AddTaskEvent({
     required this.title,
@@ -41,12 +41,14 @@ class UpdateTaskEvent extends TaskEvent {
   final String title;
   final String description;
   final String dueDate;
+  final String status;
 
   const UpdateTaskEvent({
     required this.id,
     required this.title,
     required this.description,
     required this.dueDate,
+    required this.status,
   });
 
   @override

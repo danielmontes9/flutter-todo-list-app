@@ -8,7 +8,7 @@ class Todo {
   final String title;
   final String description;
   final String dueDate;
-  final TodoStatus status;
+  final String status;
 
   Todo({
     this.id,
@@ -23,7 +23,7 @@ class Todo {
     String? title,
     String? description,
     String? dueDate,
-    TodoStatus? status,
+    String? status,
   }) {
     return Todo(
       id: id ?? this.id,
@@ -45,15 +45,14 @@ class Todo {
   }
 
   factory Todo.fromMap(Map<String, dynamic> map) {
+    print(map);
     return Todo(
       id: map['id'] ?? 0,
       title: map['title'] as String,
       description: map['description'] as String,
       dueDate: map['dueDate'] ?? '',
-      status: TodoStatus.pending,
-      // status: Todostatus.values.firstWhere(
-      //   (element) => element.toString() == 'Todostatus.${map['status']}',
-      // ),
+      // status: map['status'],
+      status: map['status'],
     );
   }
 

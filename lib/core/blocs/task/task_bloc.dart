@@ -44,7 +44,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       title: event.title,
       description: event.description,
       dueDate: event.dueDate,
-      status: TodoStatus.pending,
+      status: event.status,
     );
     emit(TaskUpdatedState(todo: updatedTask));
   }
