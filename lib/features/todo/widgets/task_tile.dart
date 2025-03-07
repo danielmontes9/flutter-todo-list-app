@@ -5,7 +5,7 @@ import 'package:flutter_todo_list_app/features/todo/data/enums/todo_status.dart'
 class TaskTile extends StatefulWidget {
   final String title;
   final String subtitle;
-  final Todostatus status;
+  final TodoStatus status;
 
   const TaskTile({
     super.key,
@@ -27,9 +27,9 @@ class _TaskTileState extends State<TaskTile> {
       leading:
           (
           // widget.leading
-          widget.status == Todostatus.pending
+          widget.status == TodoStatus.pending
               ? const Icon(Icons.pending_actions, color: AppColors.warning)
-              : widget.status == Todostatus.archived
+              : widget.status == TodoStatus.archived
               ? const Icon(Icons.pending_outlined, color: AppColors.info)
               : const Icon(Icons.task_alt, color: AppColors.success)),
       trailing: PopupMenuButton(

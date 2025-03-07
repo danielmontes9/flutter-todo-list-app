@@ -1,5 +1,6 @@
 import 'package:flutter_todo_list_app/core/helpers/database_factory.dart';
 import 'package:flutter_todo_list_app/features/todo/data/classes/todo.dart';
+import 'package:flutter_todo_list_app/features/todo/data/enums/todo_status.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -54,14 +55,18 @@ class DatabaseHelper {
     return await db.insert('tasks', taskMapped);
   }
 
-  Future<List<Todo>> getTasks() async {
+  Future<List<Todo>> getTasks(TodoStatus statusSelected) async {
     final db = await database;
 
-    List<Todo> tasks = await db.query('tasks').then((value) {
-      return value.map((e) => Todo.fromMap(e)).toList();
-    });
-    print(tasks);
-    return tasks;
+    if (statusSelected == TodoStatus.all) {
+      List<Todo> tasks = await db.query('tasks').then((value) {
+        return value.map((e) => Todo.fromMap(e)).toList();
+      });
+      print(tasks);
+      return tasks;
+    }
+
+    return List<Todo>.empty();
   }
 
   Future<int> deleteNote(int id) async {

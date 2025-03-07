@@ -62,7 +62,7 @@ class HomePageState extends State<HomePage> {
       case 2:
         return TaskList(taskTab: index);
       default:
-        _fetchTasks(TodoStatus.pending);
+        _fetchTasks(TodoStatus.all);
         return TaskList(taskTab: index);
     }
   }
