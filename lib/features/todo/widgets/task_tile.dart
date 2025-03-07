@@ -5,12 +5,14 @@ import 'package:flutter_todo_list_app/features/todo/data/enums/todo_status.dart'
 class TaskTile extends StatefulWidget {
   final String title;
   final String subtitle;
-  final TodoStatus status;
+  final String dueDate;
+  final String status;
 
   const TaskTile({
     super.key,
     required this.title,
     required this.subtitle,
+    required this.dueDate,
     required this.status,
   });
 

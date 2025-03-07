@@ -5,11 +5,13 @@ import 'package:flutter_todo_list_app/core/blocs/task/task_event.dart';
 import 'package:flutter_todo_list_app/core/blocs/task/task_state.dart';
 import 'package:flutter_todo_list_app/core/helpers/database_helper.dart';
 import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
+import 'package:flutter_todo_list_app/features/todo/data/classes/todo.dart';
 import 'package:flutter_todo_list_app/features/todo/data/enums/todo_status.dart';
 import 'package:flutter_todo_list_app/features/todo/screens/form_task.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_bar.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_drawer.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_navigation.dart';
+import 'package:flutter_todo_list_app/features/todo/widgets/task_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,6 +29,7 @@ class HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _initDatabase();
+    _fetchTasks(TodoStatus.all);
   }
 
   Future<void> _initDatabase() async {
@@ -50,20 +53,22 @@ class HomePageState extends State<HomePage> {
   void _onDestinationSelected(int index) {
     setState(() {
       screenIndex = index;
+      _fetchTasks(TodoStatus.values[index]);
     });
   }
 
-  Widget _getScreen(int index) {
+  Widget _getScreen(int index, List<Todo> todos) {
+    print(index);
     switch (index) {
       case 0:
-        return TaskList(taskTab: index);
+        return TaskList(taskTab: index, todos: todos);
       case 1:
-        return TaskList(taskTab: index);
+        return TaskList(taskTab: index, todos: todos);
       case 2:
-        return TaskList(taskTab: index);
+        return TaskList(taskTab: index, todos: todos);
       default:
         _fetchTasks(TodoStatus.all);
-        return TaskList(taskTab: index);
+        return TaskList(taskTab: index, todos: todos);
     }
   }
 
@@ -78,7 +83,24 @@ class HomePageState extends State<HomePage> {
       ),
       body: BlocBuilder<TaskBloc, TaskState>(
         builder: (context, state) {
-          return _getScreen(screenIndex);
+          print(state);
+
+          if (state is TaskInitialState) {
+            // _getScreen(screenIndex, List<Todo>.empty());
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (state is TaskLoadingState) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (state is TaskLoadedState) {
+            return state.todos.isEmpty
+                ? Center(child: const Text('No tasks found'))
+                : TaskList(taskTab: screenIndex, todos: state.todos);
+          }
+
+          return const Center(child: CircularProgressIndicator());
         },
       ),
       floatingActionButton: FloatingActionButton(
@@ -92,41 +114,5 @@ class HomePageState extends State<HomePage> {
         onDestinationSelected: _onDestinationSelected,
       ),
     );
-  }
-}
-
-class TaskList extends StatefulWidget {
-  final int taskTab;
-
-  const TaskList({super.key, required this.taskTab});
-
-  @override
-  State<TaskList> createState() => _TaskListState();
-}
-
-class _TaskListState extends State<TaskList> {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[Text('Page Index = ${widget.taskTab}')],
-      ),
-    );
-    // ListView.builder(
-    //   itemCount: 10,
-    //   itemBuilder: (BuildContext context, int index) {
-    //     return TaskTile(
-    //       title: 'Task $index',
-    //       subtitle: 'Description of task $index',
-    //       status:
-    //           index % 3 == 0
-    //               ? Todostatus.pending
-    //               : index % 3 == 1
-    //               ? Todostatus.inProgress
-    //               : Todostatus.completed,
-    //     );
-    //   },
-    // );
   }
 }

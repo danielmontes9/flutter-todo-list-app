@@ -20,7 +20,8 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   _onGetTasks(GetTasksEvent event, Emitter<TaskState> emit) async {
-    // emit(TaskLoadingState());
+    emit(TaskLoadingState());
+    emit(TaskLoadedState(todos: []));
     final tasks = await DatabaseHelper().getTasks(event.status);
     print(tasks);
     emit(TaskLoadedState(todos: tasks));
