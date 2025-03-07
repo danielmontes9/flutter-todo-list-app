@@ -4,11 +4,11 @@ import 'dart:convert';
 import 'package:flutter_todo_list_app/features/todo/data/enums/todo_status.dart';
 
 class Todo {
-  final String? id;
+  final int? id;
   final String title;
   final String description;
   final String dueDate;
-  final Todostatus status;
+  final TodoStatus status;
 
   Todo({
     this.id,
@@ -19,11 +19,11 @@ class Todo {
   });
 
   Todo copyWith({
-    String? id,
+    int? id,
     String? title,
     String? description,
     String? dueDate,
-    Todostatus? status,
+    TodoStatus? status,
   }) {
     return Todo(
       id: id ?? this.id,
@@ -46,13 +46,14 @@ class Todo {
 
   factory Todo.fromMap(Map<String, dynamic> map) {
     return Todo(
-      id: map['id'] as String,
+      id: map['id'] ?? 0,
       title: map['title'] as String,
       description: map['description'] as String,
-      dueDate: map['dueDate'] as String,
-      status: Todostatus.values.firstWhere(
-        (element) => element.toString() == 'Todostatus.${map['status']}',
-      ),
+      dueDate: map['dueDate'] ?? '',
+      status: TodoStatus.pending,
+      // status: Todostatus.values.firstWhere(
+      //   (element) => element.toString() == 'Todostatus.${map['status']}',
+      // ),
     );
   }
 

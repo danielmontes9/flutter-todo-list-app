@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todo_list_app/core/blocs/task/task_event.dart';
 import 'package:flutter_todo_list_app/core/blocs/task/task_state.dart';
+import 'package:flutter_todo_list_app/core/helpers/database_helper.dart';
 import 'package:flutter_todo_list_app/features/todo/data/classes/todo.dart';
 import 'package:flutter_todo_list_app/features/todo/data/enums/todo_status.dart';
 
@@ -18,21 +19,22 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     emit(TaskLoadingState());
   }
 
-  _onGetTasks(GetTasksEvent event, Emitter<TaskState> emit) {
-    emit(TaskLoadingState());
-    final tasks = <Todo>[];
+  _onGetTasks(GetTasksEvent event, Emitter<TaskState> emit) async {
+    // emit(TaskLoadingState());
+    final tasks = await DatabaseHelper().getTasks();
     print(tasks);
     emit(TaskLoadedState(todos: tasks));
   }
 
   _onTaskAdded(AddTaskEvent event, Emitter<TaskState> emit) {
-    final newTask = Todo(
+    Todo newTask = Todo(
       title: event.title,
       description: event.description,
       dueDate: event.dueDate,
       status: event.status,
     );
     print(newTask);
+    DatabaseHelper().insertTask(newTask);
     emit(TaskAddedState(todo: newTask));
   }
 
@@ -42,7 +44,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       title: event.title,
       description: event.description,
       dueDate: event.dueDate,
-      status: Todostatus.pending,
+      status: TodoStatus.pending,
     );
     emit(TaskUpdatedState(todo: updatedTask));
   }

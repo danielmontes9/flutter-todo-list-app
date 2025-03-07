@@ -1,4 +1,5 @@
 import 'package:flutter_todo_list_app/core/helpers/database_factory.dart';
+import 'package:flutter_todo_list_app/features/todo/data/classes/todo.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -40,14 +41,27 @@ class DatabaseHelper {
     );
   }
 
-  Future<int> insertNote(Map<String, dynamic> note) async {
+  Future<int> insertTask(Todo task) async {
     final db = await database;
-    return await db.insert('tasks', note);
+
+    Map<String, dynamic> taskMapped = {
+      'title': task.title,
+      'description': task.description,
+      'due_date': task.dueDate,
+      'status': task.status.toString(),
+    };
+
+    return await db.insert('tasks', taskMapped);
   }
 
-  Future<List<Map<String, dynamic>>> getTasks() async {
+  Future<List<Todo>> getTasks() async {
     final db = await database;
-    return await db.query('tasks');
+
+    List<Todo> tasks = await db.query('tasks').then((value) {
+      return value.map((e) => Todo.fromMap(e)).toList();
+    });
+    print(tasks);
+    return tasks;
   }
 
   Future<int> deleteNote(int id) async {

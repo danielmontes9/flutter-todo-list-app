@@ -26,7 +26,7 @@ class _FormTaskPagePageState extends State<FormTaskPage> {
         title: "TEST 1",
         description: "TEST 2",
         dueDate: "TEST 3",
-        status: Todostatus.pending,
+        status: TodoStatus.pending,
       ),
     );
   }

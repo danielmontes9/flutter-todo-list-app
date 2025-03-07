@@ -27,15 +27,14 @@ class HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _initDatabase();
-    _fetchTasks();
   }
 
   Future<void> _initDatabase() async {
     await DatabaseHelper().database;
   }
 
-  void _fetchTasks() {
-    context.read<TaskBloc>().add(GetTasksEvent(status: Todostatus.pending));
+  void _fetchTasks(TodoStatus statusSelected) {
+    context.read<TaskBloc>().add(GetTasksEvent(status: statusSelected));
   }
 
   void _goToAddTaskScreen() {
@@ -51,7 +50,6 @@ class HomePageState extends State<HomePage> {
   void _onDestinationSelected(int index) {
     setState(() {
       screenIndex = index;
-      _fetchTasks();
     });
   }
 
@@ -64,6 +62,7 @@ class HomePageState extends State<HomePage> {
       case 2:
         return TaskList(taskTab: index);
       default:
+        _fetchTasks(TodoStatus.pending);
         return TaskList(taskTab: index);
     }
   }

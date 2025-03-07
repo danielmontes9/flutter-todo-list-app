@@ -1,1 +1,1 @@
-enum Todostatus { pending, archived, completed }
+enum TodoStatus { all, pending, archived, completed }

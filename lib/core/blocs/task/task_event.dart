@@ -11,7 +11,7 @@ abstract class TaskEvent extends Equatable {
 class LoadTasksEvent extends TaskEvent {}
 
 class GetTasksEvent extends TaskEvent {
-  final Todostatus status;
+  final TodoStatus status;
 
   const GetTasksEvent({required this.status});
 
@@ -23,7 +23,7 @@ class AddTaskEvent extends TaskEvent {
   final String title;
   final String description;
   final String dueDate;
-  final Todostatus status;
+  final TodoStatus status;
 
   const AddTaskEvent({
     required this.title,
@@ -37,7 +37,7 @@ class AddTaskEvent extends TaskEvent {
 }
 
 class UpdateTaskEvent extends TaskEvent {
-  final String id;
+  final int id;
   final String title;
   final String description;
   final String dueDate;
