@@ -11,7 +11,7 @@ abstract class TaskEvent extends Equatable {
 class LoadTasksEvent extends TaskEvent {}
 
 class GetTasksEvent extends TaskEvent {
-  final TodoStatus status;
+  final String status;
 
   const GetTasksEvent({required this.status});
 

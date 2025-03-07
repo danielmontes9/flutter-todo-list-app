@@ -55,10 +55,42 @@ class DatabaseHelper {
     return await db.insert('tasks', taskMapped);
   }
 
-  Future<List<Todo>> getTasks(TodoStatus statusSelected) async {
+  Future<List<Todo>> getTasks(String statusSelected) async {
     final db = await database;
 
-    if (statusSelected == TodoStatus.all) {
+    print(statusSelected);
+
+    if (statusSelected == 'pending') {
+      List<Todo> tasks = await db
+          .query('tasks', where: 'status = ?', whereArgs: [statusSelected])
+          .then((value) {
+            return value.map((e) => Todo.fromMap(e)).toList();
+          });
+      print(tasks);
+      return tasks;
+    }
+
+    if (statusSelected == 'completed') {
+      List<Todo> tasks = await db
+          .query('tasks', where: 'status = ?', whereArgs: [statusSelected])
+          .then((value) {
+            return value.map((e) => Todo.fromMap(e)).toList();
+          });
+      print(tasks);
+      return tasks;
+    }
+
+    if (statusSelected == 'archived') {
+      List<Todo> tasks = await db
+          .query('tasks', where: 'status = ?', whereArgs: [statusSelected])
+          .then((value) {
+            return value.map((e) => Todo.fromMap(e)).toList();
+          });
+      print(tasks);
+      return tasks;
+    }
+
+    if (statusSelected == 'all') {
       List<Todo> tasks = await db.query('tasks').then((value) {
         return value.map((e) => Todo.fromMap(e)).toList();
       });
