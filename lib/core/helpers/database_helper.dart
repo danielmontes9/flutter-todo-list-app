@@ -1,6 +1,5 @@
 import 'package:flutter_todo_list_app/core/helpers/database_factory.dart';
 import 'package:flutter_todo_list_app/features/todo/data/classes/todo.dart';
-import 'package:flutter_todo_list_app/features/todo/data/enums/todo_status.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -58,15 +57,12 @@ class DatabaseHelper {
   Future<List<Todo>> getTasks(String statusSelected) async {
     final db = await database;
 
-    print(statusSelected);
-
     if (statusSelected == 'pending') {
       List<Todo> tasks = await db
           .query('tasks', where: 'status = ?', whereArgs: [statusSelected])
           .then((value) {
             return value.map((e) => Todo.fromMap(e)).toList();
           });
-      print(tasks);
       return tasks;
     }
 
@@ -76,7 +72,6 @@ class DatabaseHelper {
           .then((value) {
             return value.map((e) => Todo.fromMap(e)).toList();
           });
-      print(tasks);
       return tasks;
     }
 
@@ -86,7 +81,6 @@ class DatabaseHelper {
           .then((value) {
             return value.map((e) => Todo.fromMap(e)).toList();
           });
-      print(tasks);
       return tasks;
     }
 
@@ -94,7 +88,6 @@ class DatabaseHelper {
       List<Todo> tasks = await db.query('tasks').then((value) {
         return value.map((e) => Todo.fromMap(e)).toList();
       });
-      print(tasks);
       return tasks;
     }
 

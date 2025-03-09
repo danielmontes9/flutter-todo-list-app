@@ -3,7 +3,6 @@ import 'package:flutter_todo_list_app/core/blocs/task/task_event.dart';
 import 'package:flutter_todo_list_app/core/blocs/task/task_state.dart';
 import 'package:flutter_todo_list_app/core/helpers/database_helper.dart';
 import 'package:flutter_todo_list_app/features/todo/data/classes/todo.dart';
-import 'package:flutter_todo_list_app/features/todo/data/enums/todo_status.dart';
 
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   TaskBloc() : super(TaskInitialState()) {
@@ -23,7 +22,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     emit(TaskLoadingState());
     emit(TaskLoadedState(todos: []));
     final tasks = await DatabaseHelper().getTasks(event.status);
-    print(tasks);
     emit(TaskLoadedState(todos: tasks));
   }
 
@@ -34,7 +32,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       dueDate: event.dueDate,
       status: event.status,
     );
-    print(newTask);
     DatabaseHelper().insertTask(newTask);
     emit(TaskAddedState(todo: newTask));
   }

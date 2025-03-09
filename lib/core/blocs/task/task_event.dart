@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_todo_list_app/features/todo/data/enums/todo_status.dart';
 
 abstract class TaskEvent extends Equatable {
   const TaskEvent();

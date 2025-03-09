@@ -1,8 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:flutter_todo_list_app/features/todo/data/enums/todo_status.dart';
-
 class Todo {
   final int? id;
   final String title;
@@ -45,13 +43,11 @@ class Todo {
   }
 
   factory Todo.fromMap(Map<String, dynamic> map) {
-    print(map);
     return Todo(
       id: map['id'] ?? 0,
       title: map['title'] as String,
       description: map['description'] as String,
       dueDate: map['dueDate'] ?? '',
-      // status: map['status'],
       status: map['status'],
     );
   }
