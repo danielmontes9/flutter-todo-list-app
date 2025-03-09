@@ -99,7 +99,7 @@ class DatabaseHelper {
     return await db.delete('tasks', where: 'id = ?', whereArgs: [id]);
   }
 
-  Future<int> archiveTask(Todo task) async {
+  Future<int> updateTask(Todo task) async {
     final db = await database;
 
     Map<String, dynamic> taskMapped = {

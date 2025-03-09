@@ -52,7 +52,7 @@ class _TaskTileState extends State<TaskTile> {
 
   void _markAsCompleted(int id) {
     context.read<TaskBloc>().add(
-      UpdateTaskEvent(
+      MarkAsCompletedTaskEvent(
         id: id,
         title: widget.title,
         description: widget.subtitle,

@@ -12,6 +12,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     on<UpdateTaskEvent>(_onTaskUpdated);
     on<DeleteTaskEvent>(_onTaskDeleted);
     on<ArchiveTaskEvent>(_onTaskArchived);
+    on<MarkAsCompletedTaskEvent>(_onTaskCompleted);
   }
 
   _onLoadingTasks(LoadTasksEvent event, Emitter<TaskState> emit) {
@@ -61,8 +62,22 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       status: event.status,
     );
 
-    DatabaseHelper().archiveTask(archivedTask);
+    DatabaseHelper().updateTask(archivedTask);
 
     emit(TaskArchivedState(todo: archivedTask));
+  }
+
+  _onTaskCompleted(MarkAsCompletedTaskEvent event, Emitter<TaskState> emit) {
+    final completedTask = Todo(
+      id: event.id,
+      title: event.title,
+      description: event.description,
+      dueDate: event.dueDate,
+      status: event.status,
+    );
+
+    DatabaseHelper().updateTask(completedTask);
+
+    emit(TaskCompletedState(todo: completedTask));
   }
 }
