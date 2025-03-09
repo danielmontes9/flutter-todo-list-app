@@ -53,10 +53,10 @@ class TaskDeletedState extends TaskState {
 
 //* State when a task is archived
 class TaskArchivedState extends TaskState {
-  final String id;
+  final Todo todo;
 
-  TaskArchivedState({required this.id});
+  TaskArchivedState({required this.todo});
 
   @override
-  List<Object> get props => [id];
+  List<Object> get props => [todo];
 }

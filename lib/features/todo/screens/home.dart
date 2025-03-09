@@ -98,6 +98,10 @@ class HomePageState extends State<HomePage> {
             _fetchTasks(screenIndex);
           }
 
+          if (state is TaskArchivedState) {
+            _fetchTasks(screenIndex);
+          }
+
           return TaskListNotFound();
         },
       ),

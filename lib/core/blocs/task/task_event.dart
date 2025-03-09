@@ -64,9 +64,19 @@ class DeleteTaskEvent extends TaskEvent {
 }
 
 class ArchiveTaskEvent extends TaskEvent {
-  final String id;
+  final int id;
+  final String title;
+  final String description;
+  final String dueDate;
+  final String status;
 
-  const ArchiveTaskEvent({required this.id});
+  const ArchiveTaskEvent({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.dueDate,
+    required this.status,
+  });
 
   @override
   List<Object> get props => [id];

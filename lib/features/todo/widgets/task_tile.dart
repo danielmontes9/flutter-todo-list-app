@@ -36,7 +36,7 @@ class _TaskTileState extends State<TaskTile> {
 
   void _archieveTask(int id) {
     context.read<TaskBloc>().add(
-      UpdateTaskEvent(
+      ArchiveTaskEvent(
         id: id,
         title: widget.title,
         description: widget.subtitle,

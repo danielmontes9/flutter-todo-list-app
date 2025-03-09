@@ -53,6 +53,16 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   _onTaskArchived(ArchiveTaskEvent event, Emitter<TaskState> emit) {
-    emit(TaskArchivedState(id: event.id));
+    final archivedTask = Todo(
+      id: event.id,
+      title: event.title,
+      description: event.description,
+      dueDate: event.dueDate,
+      status: event.status,
+    );
+
+    DatabaseHelper().archiveTask(archivedTask);
+
+    emit(TaskArchivedState(todo: archivedTask));
   }
 }
