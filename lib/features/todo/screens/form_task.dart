@@ -29,6 +29,8 @@ class _FormTaskPagePageState extends State<FormTaskPage> {
         status: TodoStatus.pending.name,
       ),
     );
+
+    Navigator.pop(context);
   }
 
   @override

@@ -94,6 +94,10 @@ class HomePageState extends State<HomePage> {
                 : TaskList(taskTab: screenIndex, todos: state.todos);
           }
 
+          if (state is TaskAddedState) {
+            _fetchTasks(screenIndex);
+          }
+
           if (state is TaskDeletedState) {
             _fetchTasks(screenIndex);
           }
