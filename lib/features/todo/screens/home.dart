@@ -10,6 +10,7 @@ import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_bar.
 import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_drawer.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_navigation.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/task_list.dart';
+import 'package:flutter_todo_list_app/features/todo/widgets/task_list_not_found.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -90,7 +91,7 @@ class HomePageState extends State<HomePage> {
 
           if (state is TaskLoadedState) {
             return state.todos.isEmpty
-                ? Center(child: const Text('No tasks found'))
+                ? TaskListNotFound()
                 : TaskList(taskTab: screenIndex, todos: state.todos);
           }
 
