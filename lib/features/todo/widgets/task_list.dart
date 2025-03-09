@@ -1,4 +1,5 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
 import 'package:flutter_todo_list_app/features/todo/data/classes/todo.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/task_tile.dart';
 
@@ -18,28 +19,20 @@ class _TaskListState extends State<TaskList> {
     return ListView.builder(
       itemCount: widget.todos.length,
       itemBuilder: (BuildContext context, int index) {
-        return TaskTile(
-          title: widget.todos[index].title,
-          subtitle: widget.todos[index].description,
-          dueDate: widget.todos[index].dueDate,
-          status: widget.todos[index].status,
+        return Column(
+          children: [
+            TaskTile(
+              title: widget.todos[index].title,
+              subtitle: widget.todos[index].description,
+              dueDate: widget.todos[index].dueDate,
+              status: widget.todos[index].status,
+            ),
+            widget.todos.length != (index + 1)
+                ? Divider(indent: 24, endIndent: 24, color: AppColors.disabled)
+                : SizedBox(),
+          ],
         );
       },
     );
-    // ListView.builder(
-    //   itemCount: todos.length,
-    //   itemBuilder: (BuildContext context, int index) {
-    //     return TaskTile(
-    //       title: 'Task $index',
-    //       subtitle: 'Description of task $index',
-    //       status:
-    //           index % 3 == 0
-    //               ? TodoStatus.pending
-    //               : index % 3 == 1
-    //               ? TodoStatus.completed
-    //               : TodoStatus.archived,
-    //     );
-    //   },
-    // );
   }
 }
