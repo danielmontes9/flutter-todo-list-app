@@ -94,7 +94,7 @@ class DatabaseHelper {
     return List<Todo>.empty();
   }
 
-  Future<int> deleteNote(int id) async {
+  Future<int> deleteTask(String id) async {
     final db = await database;
     return await db.delete('tasks', where: 'id = ?', whereArgs: [id]);
   }

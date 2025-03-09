@@ -22,6 +22,7 @@ class _TaskListState extends State<TaskList> {
         return Column(
           children: [
             TaskTile(
+              id: widget.todos[index].id!,
               title: widget.todos[index].title,
               subtitle: widget.todos[index].description,
               dueDate: widget.todos[index].dueDate,

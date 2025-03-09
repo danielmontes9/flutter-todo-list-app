@@ -48,6 +48,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   _onTaskDeleted(DeleteTaskEvent event, Emitter<TaskState> emit) {
+    DatabaseHelper().deleteTask(event.id);
     emit(TaskDeletedState(id: event.id));
   }
 

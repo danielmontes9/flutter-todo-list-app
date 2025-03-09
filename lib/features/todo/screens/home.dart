@@ -11,6 +11,7 @@ import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_draw
 import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_navigation.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/task_list.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/task_list_not_found.dart';
+import 'package:logger/web.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,6 +21,8 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  var logger = Logger();
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   int screenIndex = 0;
@@ -28,14 +31,31 @@ class HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _initDatabase();
-    _fetchTasks('pending');
+    _fetchTasks(0);
   }
 
   Future<void> _initDatabase() async {
     await DatabaseHelper().database;
   }
 
-  void _fetchTasks(String statusSelected) {
+  void _fetchTasks(int index) {
+    String statusSelected = 'all';
+
+    switch (index) {
+      case 0:
+        statusSelected = 'pending';
+        break;
+      case 1:
+        statusSelected = 'completed';
+        break;
+      case 2:
+        statusSelected = 'archived';
+        break;
+      default:
+        statusSelected = 'all';
+        break;
+    }
+
     context.read<TaskBloc>().add(GetTasksEvent(status: statusSelected));
   }
 
@@ -53,20 +73,7 @@ class HomePageState extends State<HomePage> {
     setState(() {
       screenIndex = index;
 
-      switch (index) {
-        case 0:
-          _fetchTasks('pending');
-          break;
-        case 1:
-          _fetchTasks('completed');
-          break;
-        case 2:
-          _fetchTasks('archived');
-          break;
-        default:
-          _fetchTasks('all');
-          break;
-      }
+      _fetchTasks(index);
     });
   }
 
@@ -81,21 +88,17 @@ class HomePageState extends State<HomePage> {
       ),
       body: BlocBuilder<TaskBloc, TaskState>(
         builder: (context, state) {
-          if (state is TaskInitialState) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          if (state is TaskLoadingState) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
           if (state is TaskLoadedState) {
             return state.todos.isEmpty
                 ? TaskListNotFound()
                 : TaskList(taskTab: screenIndex, todos: state.todos);
           }
 
-          return const Center(child: CircularProgressIndicator());
+          if (state is TaskDeletedState) {
+            _fetchTasks(screenIndex);
+          }
+
+          return TaskListNotFound();
         },
       ),
       floatingActionButton: FloatingActionButton(
