@@ -110,7 +110,7 @@ class HomePageState extends State<HomePage> {
             _fetchTasks(screenIndex);
           }
 
-          return TaskListNotFound();
+          return Center(child: CircularProgressIndicator());
         },
       ),
       floatingActionButton: FloatingActionButton(

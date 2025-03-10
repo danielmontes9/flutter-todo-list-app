@@ -90,6 +90,11 @@ class _TaskTileState extends State<TaskTile> {
           trailing: PopupMenuButton(
             itemBuilder: (BuildContext context) {
               return <PopupMenuEntry>[
+                // CustomTaskTileMenuItem(
+                //   functionOnTap: _editTask(widget.id),
+                //   icon: Icon(Icons.edit),
+                //   label: Text('Edit'),
+                // ),
                 PopupMenuItem(
                   onTap: () => _editTask(widget.id),
                   child: Row(
@@ -126,6 +131,27 @@ class _TaskTileState extends State<TaskTile> {
           ),
         );
       },
+    );
+  }
+}
+
+class CustomTaskTileMenuItem extends StatelessWidget {
+  final void Function() functionOnTap;
+  final Icon icon;
+  final Text label;
+
+  const CustomTaskTileMenuItem({
+    super.key,
+    required this.functionOnTap,
+    required this.icon,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuItem<dynamic>(
+      onTap: functionOnTap,
+      child: Row(spacing: 8, children: [icon, label]),
     );
   }
 }
