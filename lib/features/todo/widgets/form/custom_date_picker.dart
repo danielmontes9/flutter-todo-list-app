@@ -3,8 +3,13 @@ import 'package:intl/intl.dart';
 
 class CustomDatePicker extends StatefulWidget {
   final String label;
+  final TextEditingController controller;
 
-  const CustomDatePicker({super.key, required this.label});
+  const CustomDatePicker({
+    super.key,
+    required this.label,
+    required this.controller,
+  });
 
   @override
   State<CustomDatePicker> createState() => _CustomDatePickerState();
@@ -12,7 +17,6 @@ class CustomDatePicker extends StatefulWidget {
 
 class _CustomDatePickerState extends State<CustomDatePicker> {
   DateTime? selectedDate;
-  final TextEditingController _controller = TextEditingController();
 
   Future<void> _selectDate() async {
     final DateTime? pickedDate = await showDatePicker(
@@ -27,7 +31,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
 
       if (pickedDate == null) return;
 
-      _controller.text = DateFormat.yMMMd().format(pickedDate);
+      widget.controller.text = DateFormat.yMMMd().format(pickedDate);
     });
   }
 
@@ -37,7 +41,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       width: double.infinity,
       child: TextField(
         onTap: _selectDate,
-        controller: _controller,
+        controller: widget.controller,
         readOnly: true,
         decoration: InputDecoration(
           border: OutlineInputBorder(),

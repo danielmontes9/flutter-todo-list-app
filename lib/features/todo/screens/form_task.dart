@@ -20,12 +20,17 @@ class FormTaskPage extends StatefulWidget {
 }
 
 class _FormTaskPagePageState extends State<FormTaskPage> {
+  final TextEditingController _taskNameController = TextEditingController();
+  final TextEditingController _taskDueDateController = TextEditingController();
+  final TextEditingController _taskDescriptionController =
+      TextEditingController();
+
   void _saveTask() {
     context.read<TaskBloc>().add(
       AddTaskEvent(
-        title: "TEST 1",
-        description: "TEST 2",
-        dueDate: "TEST 3",
+        title: _taskNameController.text,
+        dueDate: _taskDueDateController.text,
+        description: _taskDescriptionController.text,
         status: TodoStatus.pending.name,
       ),
     );
@@ -51,11 +56,20 @@ class _FormTaskPagePageState extends State<FormTaskPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
-                CustomTextField(label: 'Task Name'),
+                CustomTextField(
+                  label: 'Task Name',
+                  controller: _taskNameController,
+                ),
                 SizedBox(height: 28),
-                CustomDatePicker(label: 'Due Date'),
+                CustomDatePicker(
+                  label: 'Due Date',
+                  controller: _taskDueDateController,
+                ),
                 SizedBox(height: 28),
-                CustomTextArea(label: 'Description'),
+                CustomTextArea(
+                  label: 'Description',
+                  controller: _taskDescriptionController,
+                ),
                 SizedBox(height: 28),
                 CustomFilledButton(label: 'Save', onPressed: _saveTask),
               ],
