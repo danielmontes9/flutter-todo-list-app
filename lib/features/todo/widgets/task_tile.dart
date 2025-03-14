@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todo_list_app/core/blocs/task/task_bloc.dart';
 import 'package:flutter_todo_list_app/core/blocs/task/task_event.dart';
 import 'package:flutter_todo_list_app/core/blocs/task/task_state.dart';
-import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
 import 'package:flutter_todo_list_app/features/todo/screens/form_task.dart';
+import 'package:flutter_todo_list_app/features/todo/widgets/icon_status.dart';
 
 class TaskTile extends StatefulWidget {
   final int id;
@@ -73,31 +73,7 @@ class _TaskTileState extends State<TaskTile> {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
           ),
           subtitle: Text('${widget.dueDate} : ${widget.subtitle}'),
-          leading:
-              (widget.status == 'pending'
-                  ? Container(
-                    padding: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.warning,
-                    ),
-                    child: const Icon(
-                      Icons.pending_actions,
-                      size: 36,
-                      color: AppColors.white,
-                    ),
-                  )
-                  : widget.status == 'archived'
-                  ? const Icon(
-                    Icons.pending_outlined,
-                    size: 36,
-                    color: AppColors.info,
-                  )
-                  : const Icon(
-                    Icons.task_alt,
-                    size: 36,
-                    color: AppColors.success,
-                  )),
+          leading: IconStatus(status: widget.status),
           trailing: PopupMenuButton(
             itemBuilder: (BuildContext context) {
               return <PopupMenuEntry>[
