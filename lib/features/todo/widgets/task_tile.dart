@@ -67,14 +67,25 @@ class _TaskTileState extends State<TaskTile> {
     return BlocBuilder<TaskBloc, TaskState>(
       builder: (context, snapshot) {
         return ListTile(
-          title: Text(widget.title),
-          subtitle: Text(widget.subtitle),
+          onTap: () {},
+          title: Text(
+            widget.title,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+          ),
+          subtitle: Text('${widget.dueDate} : ${widget.subtitle}'),
           leading:
               (widget.status == 'pending'
-                  ? const Icon(
-                    Icons.pending_actions,
-                    size: 36,
-                    color: AppColors.warning,
+                  ? Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.warning,
+                    ),
+                    child: const Icon(
+                      Icons.pending_actions,
+                      size: 36,
+                      color: AppColors.white,
+                    ),
                   )
                   : widget.status == 'archived'
                   ? const Icon(

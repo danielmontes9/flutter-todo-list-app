@@ -29,7 +29,12 @@ class _TaskListState extends State<TaskList> {
               status: widget.todos[index].status,
             ),
             widget.todos.length != (index + 1)
-                ? Divider(indent: 24, endIndent: 24, color: AppColors.disabled)
+                ? Divider(
+                  height: 24,
+                  indent: 24,
+                  endIndent: 24,
+                  color: AppColors.disabled,
+                )
                 : SizedBox(),
           ],
         );
