@@ -4,6 +4,7 @@ import 'package:flutter_todo_list_app/core/blocs/task/task_bloc.dart';
 import 'package:flutter_todo_list_app/core/blocs/task/task_event.dart';
 import 'package:flutter_todo_list_app/core/blocs/task/task_state.dart';
 import 'package:flutter_todo_list_app/features/todo/screens/form_task.dart';
+import 'package:flutter_todo_list_app/features/todo/widgets/dialog_more_info.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/icon_status.dart';
 
 class TaskTile extends StatefulWidget {
@@ -62,12 +63,26 @@ class _TaskTileState extends State<TaskTile> {
     );
   }
 
+  Future<void> _dialogBuilder(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return DialogMoreInfo(
+          title: widget.title,
+          description: widget.subtitle,
+          dueDate: widget.dueDate,
+          status: widget.status,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TaskBloc, TaskState>(
       builder: (context, snapshot) {
         return ListTile(
-          onTap: () {},
+          onLongPress: () => _dialogBuilder(context),
           title: Text(
             widget.title,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
