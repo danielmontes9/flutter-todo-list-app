@@ -4,6 +4,7 @@ import 'package:flutter_todo_list_app/core/blocs/task/task_bloc.dart';
 import 'package:flutter_todo_list_app/core/blocs/task/task_event.dart';
 import 'package:flutter_todo_list_app/core/blocs/task/task_state.dart';
 import 'package:flutter_todo_list_app/features/todo/screens/form_task.dart';
+import 'package:flutter_todo_list_app/features/todo/widgets/dialog_confirm.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/dialog_more_info.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/icon_status.dart';
 
@@ -77,6 +78,32 @@ class _TaskTileState extends State<TaskTile> {
     );
   }
 
+  Future<void> _dialogDeleteBuilder(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return DialogConfirm(
+          title: 'Delete Task',
+          description: 'Are you sure you want to delete this task?',
+          onConfirm: () => _deleteTask(widget.id),
+        );
+      },
+    );
+  }
+
+  Future<void> _dialogArchieveBuilder(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return DialogConfirm(
+          title: 'Archieve Task',
+          description: 'Are you sure you want to archieve this task?',
+          onConfirm: () => _archieveTask(widget.id),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TaskBloc, TaskState>(
@@ -105,14 +132,14 @@ class _TaskTileState extends State<TaskTile> {
                   ),
                 ),
                 PopupMenuItem(
-                  onTap: () => _archieveTask(widget.id),
+                  onTap: () => _dialogArchieveBuilder(context),
                   child: Row(
                     spacing: 8,
                     children: [Icon(Icons.archive_outlined), Text('Archive')],
                   ),
                 ),
                 PopupMenuItem(
-                  onTap: () => _deleteTask(widget.id),
+                  onTap: () => _dialogDeleteBuilder(context),
                   child: Row(
                     spacing: 8,
                     children: [Icon(Icons.delete), Text('Delete')],
