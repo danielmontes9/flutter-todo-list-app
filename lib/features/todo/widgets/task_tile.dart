@@ -48,6 +48,18 @@ class _TaskTileState extends State<TaskTile> {
     );
   }
 
+  void _unarchieveTask(int id) {
+    context.read<TaskBloc>().add(
+      UnarchiveTaskEvent(
+        id: id,
+        title: widget.title,
+        description: widget.subtitle,
+        dueDate: widget.dueDate,
+        status: 'pending',
+      ),
+    );
+  }
+
   void _deleteTask(int id) {
     context.read<TaskBloc>().add(DeleteTaskEvent(id: id.toString()));
   }
@@ -104,6 +116,19 @@ class _TaskTileState extends State<TaskTile> {
     );
   }
 
+  Future<void> _dialogUnarchieveBuilder(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return DialogConfirm(
+          title: 'Unarchieve Task',
+          description: 'Are you sure you want to unarchieve this task?',
+          onConfirm: () => _unarchieveTask(widget.id),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TaskBloc, TaskState>(
@@ -131,13 +156,29 @@ class _TaskTileState extends State<TaskTile> {
                     children: [Icon(Icons.edit), Text('Edit')],
                   ),
                 ),
-                PopupMenuItem(
-                  onTap: () => _dialogArchieveBuilder(context),
-                  child: Row(
-                    spacing: 8,
-                    children: [Icon(Icons.archive_outlined), Text('Archive')],
-                  ),
-                ),
+
+                widget.status == 'archived'
+                    ? PopupMenuItem(
+                      onTap: () => _dialogUnarchieveBuilder(context),
+                      child: Row(
+                        spacing: 8,
+                        children: [
+                          Icon(Icons.unarchive_outlined),
+                          Text('Unarchive'),
+                        ],
+                      ),
+                    )
+                    : PopupMenuItem(
+                      onTap: () => _dialogArchieveBuilder(context),
+                      child: Row(
+                        spacing: 8,
+                        children: [
+                          Icon(Icons.archive_outlined),
+                          Text('Archive'),
+                        ],
+                      ),
+                    ),
+
                 PopupMenuItem(
                   onTap: () => _dialogDeleteBuilder(context),
                   child: Row(

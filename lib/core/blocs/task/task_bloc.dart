@@ -12,6 +12,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     on<UpdateTaskEvent>(_onTaskUpdated);
     on<DeleteTaskEvent>(_onTaskDeleted);
     on<ArchiveTaskEvent>(_onTaskArchived);
+    on<UnarchiveTaskEvent>(_onTaskUnarchived);
     on<MarkAsCompletedTaskEvent>(_onTaskCompleted);
   }
 
@@ -65,6 +66,20 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     DatabaseHelper().updateTask(archivedTask);
 
     emit(TaskArchivedState(todo: archivedTask));
+  }
+
+  _onTaskUnarchived(UnarchiveTaskEvent event, Emitter<TaskState> emit) {
+    final unarchivedTask = Todo(
+      id: event.id,
+      title: event.title,
+      description: event.description,
+      dueDate: event.dueDate,
+      status: event.status,
+    );
+
+    DatabaseHelper().updateTask(unarchivedTask);
+
+    emit(TaskUnarchivedState(todo: unarchivedTask));
   }
 
   _onTaskCompleted(MarkAsCompletedTaskEvent event, Emitter<TaskState> emit) {

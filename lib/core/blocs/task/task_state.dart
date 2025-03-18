@@ -61,6 +61,16 @@ class TaskArchivedState extends TaskState {
   List<Object> get props => [todo];
 }
 
+//* State when a task is unarchived
+class TaskUnarchivedState extends TaskState {
+  final Todo todo;
+
+  TaskUnarchivedState({required this.todo});
+
+  @override
+  List<Object> get props => [todo];
+}
+
 //* State when a task is marked as completed
 class TaskCompletedState extends TaskState {
   final Todo todo;
