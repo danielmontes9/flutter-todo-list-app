@@ -119,3 +119,22 @@ class MarkAsCompletedTaskEvent extends TaskEvent {
   @override
   List<Object> get props => [id];
 }
+
+class MarkAsUncompletedTaskEvent extends TaskEvent {
+  final int id;
+  final String title;
+  final String description;
+  final String dueDate;
+  final String status;
+
+  const MarkAsUncompletedTaskEvent({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.dueDate,
+    required this.status,
+  });
+
+  @override
+  List<Object> get props => [id];
+}

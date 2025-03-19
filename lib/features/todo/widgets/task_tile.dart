@@ -76,6 +76,18 @@ class _TaskTileState extends State<TaskTile> {
     );
   }
 
+  void _markAsUncompleted(int id) {
+    context.read<TaskBloc>().add(
+      MarkAsUncompletedTaskEvent(
+        id: id,
+        title: widget.title,
+        description: widget.subtitle,
+        dueDate: widget.dueDate,
+        status: 'pending',
+      ),
+    );
+  }
+
   Future<void> _dialogBuilder(BuildContext context) {
     return showDialog(
       context: context,
@@ -186,16 +198,28 @@ class _TaskTileState extends State<TaskTile> {
                     children: [Icon(Icons.delete), Text('Delete')],
                   ),
                 ),
-                PopupMenuItem(
-                  onTap: () => _markAsCompleted(widget.id),
-                  child: Row(
-                    spacing: 8,
-                    children: [
-                      Icon(Icons.done_all_outlined),
-                      Text('Mark as completed'),
-                    ],
-                  ),
-                ),
+
+                widget.status == 'completed'
+                    ? PopupMenuItem(
+                      onTap: () => _markAsUncompleted(widget.id),
+                      child: Row(
+                        spacing: 8,
+                        children: [
+                          Icon(Icons.pending_actions_outlined),
+                          Text('Mark as uncompleted'),
+                        ],
+                      ),
+                    )
+                    : PopupMenuItem(
+                      onTap: () => _markAsCompleted(widget.id),
+                      child: Row(
+                        spacing: 8,
+                        children: [
+                          Icon(Icons.done_all_outlined),
+                          Text('Mark as completed'),
+                        ],
+                      ),
+                    ),
               ];
             },
           ),

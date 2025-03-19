@@ -80,3 +80,13 @@ class TaskCompletedState extends TaskState {
   @override
   List<Object> get props => [todo];
 }
+
+//* State when a task is marked as uncompleted
+class TaskUncompletedState extends TaskState {
+  final Todo todo;
+
+  TaskUncompletedState({required this.todo});
+
+  @override
+  List<Object> get props => [todo];
+}
