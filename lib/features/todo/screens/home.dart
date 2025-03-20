@@ -114,6 +114,10 @@ class HomePageState extends State<HomePage> {
             _fetchTasks(screenIndex);
           }
 
+          if (state is TaskUncompletedState) {
+            _fetchTasks(screenIndex);
+          }
+
           return Center(child: CircularProgressIndicator());
         },
       ),
