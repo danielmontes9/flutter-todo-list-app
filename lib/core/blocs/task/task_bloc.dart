@@ -54,6 +54,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       dueDate: event.dueDate,
       status: event.status,
     );
+    DatabaseHelper().updateTask(updatedTask);
     emit(TaskUpdatedState(todo: updatedTask));
   }
 

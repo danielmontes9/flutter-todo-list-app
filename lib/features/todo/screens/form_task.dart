@@ -39,6 +39,20 @@ class _FormTaskPagePageState extends State<FormTaskPage> {
     Navigator.pop(context);
   }
 
+  _updateTask() {
+    context.read<TaskBloc>().add(
+      UpdateTaskEvent(
+        id: widget.id!,
+        title: _taskNameController.text,
+        dueDate: _taskDueDateController.text,
+        description: _taskDescriptionController.text,
+        status: TodoStatus.pending.name,
+      ),
+    );
+
+    Navigator.pop(context);
+  }
+
   void _loadTaskData(int id) {
     context.read<TaskBloc>().add(GetTaskByIdEvent(id: id));
   }
@@ -93,7 +107,12 @@ class _FormTaskPagePageState extends State<FormTaskPage> {
                   controller: _taskDescriptionController,
                 ),
                 SizedBox(height: 28),
-                CustomFilledButton(label: 'Save', onPressed: _saveTask),
+                widget.id == null
+                    ? CustomFilledButton(label: 'Save', onPressed: _saveTask)
+                    : CustomFilledButton(
+                      label: 'Update',
+                      onPressed: _updateTask,
+                    ),
               ],
             ),
           );
