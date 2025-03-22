@@ -18,6 +18,15 @@ class GetTasksEvent extends TaskEvent {
   List<Object> get props => [status];
 }
 
+class GetTaskByIdEvent extends TaskEvent {
+  final int id;
+
+  const GetTaskByIdEvent({required this.id});
+
+  @override
+  List<Object> get props => [id];
+}
+
 class AddTaskEvent extends TaskEvent {
   final String title;
   final String description;

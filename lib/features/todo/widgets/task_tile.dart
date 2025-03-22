@@ -29,9 +29,11 @@ class TaskTile extends StatefulWidget {
 }
 
 class _TaskTileState extends State<TaskTile> {
-  void _editTask(int id) {
+  void _editTask(int idSelected) {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => FormTaskPage(title: 'Edit Task')),
+      MaterialPageRoute(
+        builder: (context) => FormTaskPage(title: 'Edit Task', id: idSelected),
+      ),
     );
     return;
   }

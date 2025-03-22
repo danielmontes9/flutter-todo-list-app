@@ -8,6 +8,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   TaskBloc() : super(TaskInitialState()) {
     on<LoadTasksEvent>(_onLoadingTasks);
     on<GetTasksEvent>(_onGetTasks);
+    on<GetTaskByIdEvent>(_onGetTaskById);
     on<AddTaskEvent>(_onTaskAdded);
     on<UpdateTaskEvent>(_onTaskUpdated);
     on<DeleteTaskEvent>(_onTaskDeleted);
@@ -26,6 +27,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     emit(TaskLoadedState(todos: []));
     final tasks = await DatabaseHelper().getTasks(event.status);
     emit(TaskLoadedState(todos: tasks));
+  }
+
+  _onGetTaskById(GetTaskByIdEvent event, Emitter<TaskState> emit) async {
+    emit(TaskLoadingState());
+    final Todo? task = await DatabaseHelper().getTaskById(event.id);
+    emit(TaskById(todo: task as Todo));
   }
 
   _onTaskAdded(AddTaskEvent event, Emitter<TaskState> emit) {

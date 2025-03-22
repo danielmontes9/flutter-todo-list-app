@@ -12,8 +12,9 @@ import 'package:flutter_todo_list_app/features/todo/widgets/form/custom_text_fie
 
 class FormTaskPage extends StatefulWidget {
   final String title;
+  final int? id;
 
-  const FormTaskPage({super.key, required this.title});
+  const FormTaskPage({super.key, required this.title, this.id});
 
   @override
   State<FormTaskPage> createState() => _FormTaskPagePageState();
@@ -38,6 +39,19 @@ class _FormTaskPagePageState extends State<FormTaskPage> {
     Navigator.pop(context);
   }
 
+  void _loadTaskData(int id) {
+    context.read<TaskBloc>().add(GetTaskByIdEvent(id: id));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.id != null) {
+      // Load the task data if an ID is provided
+      _loadTaskData(widget.id!);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +64,14 @@ class _FormTaskPagePageState extends State<FormTaskPage> {
       ),
       body: BlocBuilder<TaskBloc, TaskState>(
         builder: (context, state) {
+          if (state is TaskById) {
+            if (state.todo.id != null) {
+              _taskNameController.text = state.todo.title;
+              _taskDueDateController.text = state.todo.dueDate;
+              _taskDescriptionController.text = state.todo.description;
+            }
+          }
+
           return Padding(
             padding: const EdgeInsets.all(24.0),
             child: Column(

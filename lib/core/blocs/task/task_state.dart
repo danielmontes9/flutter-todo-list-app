@@ -21,6 +21,16 @@ class TaskLoadedState extends TaskState {
   List<Object> get props => [todos];
 }
 
+//* State when a task is being loaded by ID
+class TaskById extends TaskState {
+  final Todo todo;
+
+  TaskById({required this.todo});
+
+  @override
+  List<Object> get props => [todo];
+}
+
 //* State when a task is added
 class TaskAddedState extends TaskState {
   final Todo todo;

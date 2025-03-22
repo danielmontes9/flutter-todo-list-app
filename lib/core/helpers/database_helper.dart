@@ -94,6 +94,21 @@ class DatabaseHelper {
     return List<Todo>.empty();
   }
 
+  Future<Todo?> getTaskById(int id) async {
+    final db = await database;
+    List<Map<String, dynamic>> maps = await db.query(
+      'tasks',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+    if (maps.isNotEmpty) {
+      return Todo.fromMap(maps.first);
+    } else {
+      return null;
+    }
+  }
+
   Future<int> deleteTask(String id) async {
     final db = await database;
     return await db.delete('tasks', where: 'id = ?', whereArgs: [id]);
