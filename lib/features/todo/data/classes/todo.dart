@@ -37,7 +37,7 @@ class Todo {
       'id': id,
       'title': title,
       'description': description,
-      'dueDate': dueDate,
+      'due_date': dueDate,
       'status': status,
     };
   }
@@ -47,7 +47,7 @@ class Todo {
       id: map['id'] ?? 0,
       title: map['title'] as String,
       description: map['description'] as String,
-      dueDate: map['dueDate'] ?? '',
+      dueDate: map['due_date'] ?? '',
       status: map['status'],
     );
   }
