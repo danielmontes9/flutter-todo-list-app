@@ -153,7 +153,16 @@ class _TaskTileState extends State<TaskTile> {
             widget.title,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
           ),
-          subtitle: Text('${widget.dueDate} : ${widget.subtitle}'),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.dueDate,
+                style: TextStyle(fontWeight: FontWeight.w500),
+              ),
+              Text(widget.subtitle),
+            ],
+          ),
           leading: IconStatus(status: widget.status),
           trailing: PopupMenuButton(
             itemBuilder: (BuildContext context) {
