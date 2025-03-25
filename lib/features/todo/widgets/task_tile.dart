@@ -152,6 +152,7 @@ class _TaskTileState extends State<TaskTile> {
           title: Text(
             widget.title,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            maxLines: 1,
           ),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,7 +161,7 @@ class _TaskTileState extends State<TaskTile> {
                 widget.dueDate,
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
-              Text(widget.subtitle),
+              Text(widget.subtitle, maxLines: 1),
             ],
           ),
           leading: IconStatus(status: widget.status),
