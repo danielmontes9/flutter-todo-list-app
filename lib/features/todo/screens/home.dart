@@ -11,6 +11,7 @@ import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_draw
 import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_navigation.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/task_list.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/task_list_not_found.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:logger/web.dart';
 
 class HomePage extends StatefulWidget {
@@ -129,11 +130,39 @@ class HomePageState extends State<HomePage> {
           return Center(child: CircularProgressIndicator());
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.secondary,
-        onPressed: _goToAddTaskScreen,
-        tooltip: 'Add Task',
-        child: const Icon(Icons.add),
+      floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButton: ExpandableFab(
+        pos: ExpandableFabPos.center,
+        type: ExpandableFabType.up,
+        overlayStyle: ExpandableFabOverlayStyle(blur: 1.5),
+        distance: 70,
+        margin: const EdgeInsets.only(bottom: -48),
+        openButtonBuilder: RotateFloatingActionButtonBuilder(
+          child: const Icon(Icons.add),
+          fabSize: ExpandableFabSize.regular,
+          backgroundColor: AppColors.secondary,
+          shape: const CircleBorder(),
+        ),
+        closeButtonBuilder: RotateFloatingActionButtonBuilder(
+          child: const Icon(Icons.close),
+          fabSize: ExpandableFabSize.regular,
+          backgroundColor: AppColors.secondary,
+          shape: const CircleBorder(),
+        ),
+        children: [
+          FloatingActionButton(
+            heroTag: null,
+            onPressed: _goToAddTaskScreen,
+            shape: const CircleBorder(),
+            child: const Icon(Icons.add_circle),
+          ),
+          FloatingActionButton(
+            heroTag: null,
+            onPressed: () {},
+            shape: const CircleBorder(),
+            child: const Icon(Icons.filter_alt),
+          ),
+        ],
       ),
       bottomNavigationBar: CustomAppNavigation(
         screenIndex: screenIndex,
