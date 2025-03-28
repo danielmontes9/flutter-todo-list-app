@@ -131,39 +131,42 @@ class HomePageState extends State<HomePage> {
         },
       ),
       floatingActionButtonLocation: ExpandableFab.location,
-      floatingActionButton: ExpandableFab(
-        pos: ExpandableFabPos.center,
-        type: ExpandableFabType.up,
-        overlayStyle: ExpandableFabOverlayStyle(blur: 1.5),
-        distance: 70,
-        margin: const EdgeInsets.only(bottom: -48),
-        openButtonBuilder: RotateFloatingActionButtonBuilder(
-          child: const Icon(Icons.add),
-          fabSize: ExpandableFabSize.regular,
-          backgroundColor: AppColors.secondary,
-          shape: const CircleBorder(),
-        ),
-        closeButtonBuilder: RotateFloatingActionButtonBuilder(
-          child: const Icon(Icons.close),
-          fabSize: ExpandableFabSize.regular,
-          backgroundColor: AppColors.secondary,
-          shape: const CircleBorder(),
-        ),
-        children: [
-          FloatingActionButton(
-            heroTag: null,
-            onPressed: _goToAddTaskScreen,
-            shape: const CircleBorder(),
-            child: const Icon(Icons.add_circle),
-          ),
-          FloatingActionButton(
-            heroTag: null,
-            onPressed: () {},
-            shape: const CircleBorder(),
-            child: const Icon(Icons.filter_alt),
-          ),
-        ],
-      ),
+      floatingActionButton:
+          screenIndex == 0 || screenIndex == 1
+              ? ExpandableFab(
+                pos: ExpandableFabPos.center,
+                type: ExpandableFabType.up,
+                overlayStyle: ExpandableFabOverlayStyle(blur: 1.5),
+                distance: 70,
+                margin: const EdgeInsets.only(bottom: -48),
+                openButtonBuilder: RotateFloatingActionButtonBuilder(
+                  child: const Icon(Icons.add),
+                  fabSize: ExpandableFabSize.regular,
+                  backgroundColor: AppColors.secondary,
+                  shape: const CircleBorder(),
+                ),
+                closeButtonBuilder: RotateFloatingActionButtonBuilder(
+                  child: const Icon(Icons.close),
+                  fabSize: ExpandableFabSize.regular,
+                  backgroundColor: AppColors.secondary,
+                  shape: const CircleBorder(),
+                ),
+                children: [
+                  FloatingActionButton(
+                    heroTag: null,
+                    onPressed: _goToAddTaskScreen,
+                    shape: const CircleBorder(),
+                    child: const Icon(Icons.add_circle),
+                  ),
+                  FloatingActionButton(
+                    heroTag: null,
+                    onPressed: () {},
+                    shape: const CircleBorder(),
+                    child: const Icon(Icons.filter_alt),
+                  ),
+                ],
+              )
+              : null,
       bottomNavigationBar: CustomAppNavigation(
         screenIndex: screenIndex,
         onDestinationSelected: _onDestinationSelected,
