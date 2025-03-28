@@ -15,7 +15,7 @@ class CustomTextArea extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: 120,
-      child: TextField(
+      child: TextFormField(
         maxLines: null,
         expands: true,
         textAlignVertical: TextAlignVertical.top,
@@ -25,6 +25,12 @@ class CustomTextArea extends StatelessWidget {
           labelText: label,
           contentPadding: const EdgeInsets.all(10),
         ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter $label';
+          }
+          return null;
+        },
       ),
     );
   }

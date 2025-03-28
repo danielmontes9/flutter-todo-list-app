@@ -39,7 +39,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: TextField(
+      child: TextFormField(
         onTap: _selectDate,
         controller: widget.controller,
         readOnly: true,
@@ -48,6 +48,12 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           labelText: widget.label,
           suffixIcon: Icon(Icons.calendar_today),
         ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter ${widget.label}';
+          }
+          return null;
+        },
       ),
     );
   }

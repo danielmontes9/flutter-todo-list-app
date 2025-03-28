@@ -21,12 +21,18 @@ class FormTaskPage extends StatefulWidget {
 }
 
 class _FormTaskPagePageState extends State<FormTaskPage> {
+  final _formKey = GlobalKey<FormState>();
+
   final TextEditingController _taskNameController = TextEditingController();
   final TextEditingController _taskDueDateController = TextEditingController();
   final TextEditingController _taskDescriptionController =
       TextEditingController();
 
   void _saveTask() {
+    if (_formKey.currentState?.validate() == false) {
+      return;
+    }
+
     context.read<TaskBloc>().add(
       AddTaskEvent(
         title: _taskNameController.text,
@@ -35,11 +41,14 @@ class _FormTaskPagePageState extends State<FormTaskPage> {
         status: TodoStatus.pending.name,
       ),
     );
-
     Navigator.pop(context);
   }
 
   _updateTask() {
+    if (_formKey.currentState?.validate() == false) {
+      return;
+    }
+
     context.read<TaskBloc>().add(
       UpdateTaskEvent(
         id: widget.id!,
@@ -88,32 +97,35 @@ class _FormTaskPagePageState extends State<FormTaskPage> {
 
           return Padding(
             padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                CustomTextField(
-                  label: 'Task Name',
-                  controller: _taskNameController,
-                ),
-                SizedBox(height: 28),
-                CustomDatePicker(
-                  label: 'Due Date',
-                  controller: _taskDueDateController,
-                ),
-                SizedBox(height: 28),
-                CustomTextArea(
-                  label: 'Description',
-                  controller: _taskDescriptionController,
-                ),
-                SizedBox(height: 28),
-                widget.id == null
-                    ? CustomFilledButton(label: 'Save', onPressed: _saveTask)
-                    : CustomFilledButton(
-                      label: 'Update',
-                      onPressed: _updateTask,
-                    ),
-              ],
+            child: Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  CustomTextField(
+                    label: 'Task Name',
+                    controller: _taskNameController,
+                  ),
+                  SizedBox(height: 28),
+                  CustomDatePicker(
+                    label: 'Due Date',
+                    controller: _taskDueDateController,
+                  ),
+                  SizedBox(height: 28),
+                  CustomTextArea(
+                    label: 'Description',
+                    controller: _taskDescriptionController,
+                  ),
+                  SizedBox(height: 28),
+                  widget.id == null
+                      ? CustomFilledButton(label: 'Save', onPressed: _saveTask)
+                      : CustomFilledButton(
+                        label: 'Update',
+                        onPressed: _updateTask,
+                      ),
+                ],
+              ),
             ),
           );
         },

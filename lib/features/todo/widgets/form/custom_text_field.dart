@@ -14,12 +14,18 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      child: TextField(
+      child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           labelText: label,
         ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter $label';
+          }
+          return null;
+        },
       ),
     );
   }
