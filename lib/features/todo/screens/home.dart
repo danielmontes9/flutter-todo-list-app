@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_todo_list_app/core/blocs/task/task_bloc.dart';
 import 'package:flutter_todo_list_app/core/blocs/task/task_event.dart';
 import 'package:flutter_todo_list_app/core/blocs/task/task_state.dart';
+import 'package:flutter_todo_list_app/core/helpers/database_config_helper.dart';
 import 'package:flutter_todo_list_app/core/helpers/database_helper.dart';
 import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
 import 'package:flutter_todo_list_app/features/todo/screens/form_task.dart';
@@ -32,11 +33,16 @@ class HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _initDatabase();
+    _initConfig();
     _fetchTasks(0);
   }
 
   Future<void> _initDatabase() async {
     await DatabaseHelper().database;
+  }
+
+  Future<void> _initConfig() async {
+    await DatabaseConfigHelper().database;
   }
 
   void _fetchTasks(int index) {
