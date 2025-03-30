@@ -16,29 +16,51 @@ class TaskList extends StatefulWidget {
 class _TaskListState extends State<TaskList> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: widget.todos.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Column(
-          children: [
-            TaskTile(
-              id: widget.todos[index].id!,
-              title: widget.todos[index].title,
-              subtitle: widget.todos[index].description,
-              dueDate: widget.todos[index].dueDate,
-              status: widget.todos[index].status,
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                'Total of Tasks (${widget.todos.length})',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-            widget.todos.length != (index + 1)
-                ? Divider(
-                  height: 24,
-                  indent: 24,
-                  endIndent: 24,
-                  color: AppColors.disabled,
-                )
-                : SizedBox(),
-          ],
-        );
-      },
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: widget.todos.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Column(
+                  children: [
+                    TaskTile(
+                      id: widget.todos[index].id!,
+                      title: widget.todos[index].title,
+                      subtitle: widget.todos[index].description,
+                      dueDate: widget.todos[index].dueDate,
+                      status: widget.todos[index].status,
+                    ),
+                    widget.todos.length != (index + 1)
+                        ? Divider(
+                          height: 24,
+                          indent: 24,
+                          endIndent: 24,
+                          color: AppColors.disabled,
+                        )
+                        : SizedBox(),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

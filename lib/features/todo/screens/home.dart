@@ -98,7 +98,11 @@ class HomePageState extends State<HomePage> {
           if (state is TaskLoadedState) {
             return state.todos.isEmpty
                 ? TaskListNotFound()
-                : TaskList(taskTab: screenIndex, todos: state.todos);
+                : Column(
+                  children: [
+                    TaskList(taskTab: screenIndex, todos: state.todos),
+                  ],
+                );
           }
 
           if (state is TaskById) {
