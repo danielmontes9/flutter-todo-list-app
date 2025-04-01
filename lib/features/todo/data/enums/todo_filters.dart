@@ -1,0 +1,1 @@
+enum FiltersByTasks { name, date }
