@@ -49,6 +49,8 @@ class HomePageState extends State<HomePage> {
   void _fetchTasks(int index) {
     String statusSelected = 'all';
 
+    print(index);
+
     switch (index) {
       case 0:
         statusSelected = 'pending';
@@ -58,6 +60,12 @@ class HomePageState extends State<HomePage> {
         break;
       case 2:
         statusSelected = 'archived';
+        break;
+      case 3:
+        statusSelected = 'all';
+        break;
+      case 4:
+        statusSelected = 'report';
         break;
       default:
         statusSelected = 'all';
