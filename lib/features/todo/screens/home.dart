@@ -11,6 +11,7 @@ import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_bar.
 import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_bottom_filter.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_drawer.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_navigation.dart';
+import 'package:flutter_todo_list_app/features/todo/widgets/report/layout_report.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/task_list.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/task_list_not_found.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
@@ -105,6 +106,10 @@ class HomePageState extends State<HomePage> {
       body: BlocBuilder<TaskBloc, TaskState>(
         builder: (context, state) {
           if (state is TaskLoadedState) {
+            if (screenIndex == 4) {
+              return LayoutReport();
+            }
+
             return state.todos.isEmpty
                 ? TaskListNotFound()
                 : Column(

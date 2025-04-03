@@ -13,7 +13,11 @@ class AppColors {
   static const Color textSecondary = Color(0xFF828282);
   static const Color error = Color(0xFFD32F2F);
   static const Color success = Color(0xFF388E3C);
+  static const Color successLight = Color.fromARGB(255, 56, 142, 60);
+  static const Color successDark = Color.fromARGB(255, 27, 94, 32);
   static const Color warning = Color(0xFFf57C00);
+  static const Color warningLight = Color.fromARGB(255, 255, 145, 35);
+  static const Color warningDark = Color.fromARGB(255, 202, 101, 0);
   static const Color info = Color(0xFF1976D2);
   static const Color disabled = Color(0xFFBDBDBD);
   static const Color divider = Color(0xFFBDBDBD);
