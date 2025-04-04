@@ -17,7 +17,29 @@ class LayoutReport extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Row(children: []),
+            SizedBox(height: 20),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Progress of the month',
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: LinearProgressIndicator(
+                    minHeight: 24,
+                    borderRadius: BorderRadius.circular(12),
+                    value: 20,
+                    semanticsLabel: 'Linear progress indicator',
+                  ),
+                ),
+                SizedBox(width: 10),
+                Text('20%', style: TextStyle(fontSize: 20)),
+              ],
+            ),
+            SizedBox(height: 20),
             Row(
               children: [
                 Expanded(child: CardStatus(type: 'pending', value: 0)),
