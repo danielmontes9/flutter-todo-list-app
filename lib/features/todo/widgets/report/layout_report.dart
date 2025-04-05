@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/report/card_status.dart';
 
 class LayoutReport extends StatelessWidget {
@@ -6,6 +7,8 @@ class LayoutReport extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -25,18 +28,39 @@ class LayoutReport extends StatelessWidget {
                 style: TextStyle(fontSize: 20),
               ),
             ),
-            Row(
+            Column(
               children: [
-                Expanded(
-                  child: LinearProgressIndicator(
-                    minHeight: 24,
-                    borderRadius: BorderRadius.circular(12),
-                    value: 20,
-                    semanticsLabel: 'Linear progress indicator',
-                  ),
+                Stack(
+                  children: [
+                    Container(
+                      height: 28,
+                      width: screenWidth,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.grey[300],
+                      ),
+                    ),
+                    Container(
+                      height: 28,
+                      width: screenWidth * 0.6, // 60% progress
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: AppColors.info,
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Center(
+                        child: Text(
+                          "60%",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: AppColors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(width: 10),
-                Text('20%', style: TextStyle(fontSize: 20)),
               ],
             ),
             SizedBox(height: 20),

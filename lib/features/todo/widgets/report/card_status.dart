@@ -11,7 +11,8 @@ class CardStatus extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: type == "pending" ? AppColors.warningDark : AppColors.success,
+        color:
+            type == "pending" ? AppColors.warningDark : AppColors.successDark,
         borderRadius: const BorderRadius.all(Radius.circular(20)),
       ),
       child: Card(
@@ -20,7 +21,9 @@ class CardStatus extends StatelessWidget {
         child: InkWell(
           onTap: () {},
           splashColor:
-              type == "pending" ? AppColors.warningLight : AppColors.success,
+              type == "pending"
+                  ? AppColors.warningLight
+                  : AppColors.successLight,
           radius: 20,
           borderRadius: const BorderRadius.all(Radius.circular(20)),
           child: Padding(
