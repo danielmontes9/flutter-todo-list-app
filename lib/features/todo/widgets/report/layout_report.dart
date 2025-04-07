@@ -18,7 +18,7 @@ class LayoutReport extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-    double percentageCompleted = (completedTasks / totalTasks) * 100;
+    double percentageCompleted = (completedTasks / totalTasks);
 
     return Scaffold(
       appBar: AppBar(
@@ -53,7 +53,9 @@ class LayoutReport extends StatelessWidget {
                     ),
                     Container(
                       height: 28,
-                      width: screenWidth * 0.6, // 60% progress
+                      width:
+                          screenWidth *
+                          percentageCompleted, // percentageCompleted progress
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: AppColors.info,
@@ -65,7 +67,7 @@ class LayoutReport extends StatelessWidget {
                           "$percentageCompleted%",
                           style: TextStyle(
                             fontSize: 16,
-                            color: AppColors.white,
+                            color: AppColors.black,
                           ),
                         ),
                       ),
