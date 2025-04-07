@@ -6,6 +6,7 @@ import 'package:flutter_todo_list_app/core/blocs/task/task_state.dart';
 import 'package:flutter_todo_list_app/core/helpers/database_config_helper.dart';
 import 'package:flutter_todo_list_app/core/helpers/database_helper.dart';
 import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
+import 'package:flutter_todo_list_app/features/todo/data/classes/todo.dart';
 import 'package:flutter_todo_list_app/features/todo/screens/form_task.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_bar.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/home/custom_app_bottom_filter.dart';
@@ -50,8 +51,6 @@ class HomePageState extends State<HomePage> {
   void _fetchTasks(int index) {
     String statusSelected = 'all';
 
-    print(index);
-
     switch (index) {
       case 0:
         statusSelected = 'pending';
@@ -66,7 +65,7 @@ class HomePageState extends State<HomePage> {
         statusSelected = 'all';
         break;
       case 4:
-        statusSelected = 'report';
+        statusSelected = 'all';
         break;
       default:
         statusSelected = 'all';
@@ -94,6 +93,22 @@ class HomePageState extends State<HomePage> {
     });
   }
 
+  Widget _showScreen(List<Todo> todos, int screenIndexSelected) {
+    if (screenIndexSelected == 4) {
+      int totalTasks = todos.length;
+      int completedTasks =
+          todos.where((task) => task.status == 'completed').length;
+      int pendingTasks = todos.where((task) => task.status == 'pending').length;
+      return LayoutReport(
+        totalTasks: totalTasks,
+        completedTasks: completedTasks,
+        pendingTasks: pendingTasks,
+      );
+    } else {
+      return Column(children: [TaskList(taskTab: screenIndex, todos: todos)]);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,17 +121,9 @@ class HomePageState extends State<HomePage> {
       body: BlocBuilder<TaskBloc, TaskState>(
         builder: (context, state) {
           if (state is TaskLoadedState) {
-            if (screenIndex == 4) {
-              return LayoutReport();
-            }
-
             return state.todos.isEmpty
                 ? TaskListNotFound()
-                : Column(
-                  children: [
-                    TaskList(taskTab: screenIndex, todos: state.todos),
-                  ],
-                );
+                : _showScreen(state.todos, screenIndex);
           }
 
           if (state is TaskById) {

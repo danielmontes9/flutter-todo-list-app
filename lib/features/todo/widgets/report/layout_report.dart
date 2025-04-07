@@ -3,11 +3,22 @@ import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
 import 'package:flutter_todo_list_app/features/todo/widgets/report/card_status.dart';
 
 class LayoutReport extends StatelessWidget {
-  const LayoutReport({super.key});
+  final int totalTasks;
+  final int completedTasks;
+  final int pendingTasks;
+
+  const LayoutReport({
+    super.key,
+    required this.totalTasks,
+    required this.completedTasks,
+    required this.pendingTasks,
+  });
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+
+    double percentageCompleted = (completedTasks / totalTasks) * 100;
 
     return Scaffold(
       appBar: AppBar(
@@ -51,7 +62,7 @@ class LayoutReport extends StatelessWidget {
                     Positioned.fill(
                       child: Center(
                         child: Text(
-                          "60%",
+                          "$percentageCompleted%",
                           style: TextStyle(
                             fontSize: 16,
                             color: AppColors.white,
@@ -66,9 +77,13 @@ class LayoutReport extends StatelessWidget {
             SizedBox(height: 20),
             Row(
               children: [
-                Expanded(child: CardStatus(type: 'pending', value: 0)),
+                Expanded(
+                  child: CardStatus(type: 'pending', value: pendingTasks),
+                ),
                 SizedBox(width: 10),
-                Expanded(child: CardStatus(type: 'completed', value: 0)),
+                Expanded(
+                  child: CardStatus(type: 'completed', value: completedTasks),
+                ),
               ],
             ),
           ],
