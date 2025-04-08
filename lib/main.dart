@@ -5,11 +5,15 @@ import 'package:flutter_todo_list_app/core/blocs/theme/theme_bloc.dart';
 import 'package:flutter_todo_list_app/core/blocs/theme/theme_state.dart';
 import 'package:flutter_todo_list_app/features/todo/screens/home.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final themeBloc = await ThemeBloc.create();
+
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => ThemeBloc()),
+        BlocProvider(create: (_) => themeBloc),
         BlocProvider(create: (_) => TaskBloc()),
       ],
       child: const MyApp(),
