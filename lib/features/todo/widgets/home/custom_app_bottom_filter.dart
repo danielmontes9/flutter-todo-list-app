@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_list_app/core/theme/app_colors.dart';
-import 'package:flutter_todo_list_app/features/todo/data/enums/todo_filters.dart';
 
 class CustomAppBottomFilter extends StatefulWidget {
   const CustomAppBottomFilter({super.key});
@@ -12,7 +11,28 @@ class CustomAppBottomFilter extends StatefulWidget {
 class CustomAppBottomFilterState extends State<CustomAppBottomFilter> {
   int selectedIndex = 0;
 
-  FiltersByTasks? _character = FiltersByTasks.name;
+  IconData? _iconArrowName;
+  IconData? _iconArrowDate;
+
+  void updateSortingName() {
+    setState(() {
+      _iconArrowDate = null;
+      _iconArrowName =
+          _iconArrowName == Icons.arrow_upward
+              ? Icons.arrow_downward
+              : Icons.arrow_upward;
+    });
+  }
+
+  void updateSortingDate() {
+    setState(() {
+      _iconArrowName = null;
+      _iconArrowDate =
+          _iconArrowDate == Icons.arrow_upward
+              ? Icons.arrow_downward
+              : Icons.arrow_upward;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +53,7 @@ class CustomAppBottomFilterState extends State<CustomAppBottomFilter> {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Filter data by:',
+                        'Sort data by:',
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -43,34 +63,20 @@ class CustomAppBottomFilterState extends State<CustomAppBottomFilter> {
                   ),
                   Divider(indent: 24, endIndent: 24, color: AppColors.disabled),
                   ListTile(
-                    title: const Text('Name', style: TextStyle(fontSize: 16)),
-                    leading: Radio<FiltersByTasks>(
-                      value: FiltersByTasks.name,
-                      groupValue: _character,
-                      onChanged: (value) {
-                        setModalState(() {
-                          _character = value!;
-                        });
-                        setState(() {
-                          _character = value!;
-                        });
-                      },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
                     ),
+                    title: const Text('Name', style: TextStyle(fontSize: 16)),
+                    trailing: Icon(_iconArrowName),
+                    onTap: updateSortingName,
                   ),
                   ListTile(
-                    title: const Text('Date', style: TextStyle(fontSize: 16)),
-                    leading: Radio<FiltersByTasks>(
-                      value: FiltersByTasks.date,
-                      groupValue: _character,
-                      onChanged: (value) {
-                        setModalState(() {
-                          _character = value!;
-                        });
-                        setState(() {
-                          _character = value!;
-                        });
-                      },
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
                     ),
+                    title: const Text('Date', style: TextStyle(fontSize: 16)),
+                    trailing: Icon(_iconArrowDate),
+                    onTap: updateSortingDate,
                   ),
                 ],
               ),
