@@ -84,6 +84,15 @@ class _FormTaskPagePageState extends State<FormTaskPage> {
           widget.title,
           style: const TextStyle(color: AppColors.white),
         ),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: AppColors.white,
+          ), // Custom back arrow
+          onPressed: () {
+            Navigator.pop(context); // Navigate back
+          },
+        ),
       ),
       body: BlocBuilder<TaskBloc, TaskState>(
         builder: (context, state) {
