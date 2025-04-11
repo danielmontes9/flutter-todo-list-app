@@ -29,6 +29,7 @@ class HomePageState extends State<HomePage> {
   var logger = Logger();
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _expandableKey = GlobalKey<ExpandableFabState>();
 
   int screenIndex = 0;
 
@@ -77,6 +78,8 @@ class HomePageState extends State<HomePage> {
 
   void _goToAddTaskScreen() {
     setState(() {
+      toggleExpandableButton();
+
       Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => const FormTaskPage(title: 'Add Task'),
@@ -106,6 +109,13 @@ class HomePageState extends State<HomePage> {
       );
     } else {
       return Column(children: [TaskList(taskTab: screenIndex, todos: todos)]);
+    }
+  }
+
+  void toggleExpandableButton() {
+    final state = _expandableKey.currentState;
+    if (state != null) {
+      state.toggle();
     }
   }
 
@@ -165,6 +175,7 @@ class HomePageState extends State<HomePage> {
       floatingActionButton:
           screenIndex == 0 || screenIndex == 1
               ? ExpandableFab(
+                key: _expandableKey,
                 pos: ExpandableFabPos.center,
                 type: ExpandableFabType.up,
                 overlayStyle: ExpandableFabOverlayStyle(blur: 1.5),
@@ -192,6 +203,8 @@ class HomePageState extends State<HomePage> {
                   FloatingActionButton(
                     heroTag: null,
                     onPressed: () {
+                      toggleExpandableButton();
+
                       showModalBottomSheet(
                         context: context,
                         shape: RoundedRectangleBorder(
