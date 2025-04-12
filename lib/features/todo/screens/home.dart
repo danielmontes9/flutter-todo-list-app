@@ -130,6 +130,8 @@ class HomePageState extends State<HomePage> {
       ),
       body: BlocBuilder<TaskBloc, TaskState>(
         builder: (context, state) {
+          print('State: $state');
+
           if (state is TaskLoadedState) {
             return state.todos.isEmpty
                 ? TaskListNotFound()
@@ -212,7 +214,9 @@ class HomePageState extends State<HomePage> {
                             top: Radius.circular(20),
                           ),
                         ),
-                        builder: (context) => CustomAppBottomFilter(),
+                        builder:
+                            (context) =>
+                                CustomAppBottomFilter(screenIndex: screenIndex),
                       );
                     },
 

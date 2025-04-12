@@ -11,8 +11,9 @@ class LoadTasksEvent extends TaskEvent {}
 
 class GetTasksEvent extends TaskEvent {
   final String status;
+  final String? orderBy;
 
-  const GetTasksEvent({required this.status});
+  const GetTasksEvent({required this.status, this.orderBy});
 
   @override
   List<Object> get props => [status];

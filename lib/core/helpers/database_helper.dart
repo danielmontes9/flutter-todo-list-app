@@ -54,12 +54,20 @@ class DatabaseHelper {
     return await db.insert('tasks', taskMapped);
   }
 
-  Future<List<Todo>> getTasks(String statusSelected) async {
+  Future<List<Todo>> getTasks(
+    String statusSelected,
+    String? orderBySelected,
+  ) async {
     final db = await database;
 
     if (statusSelected == 'pending') {
       List<Todo> tasks = await db
-          .query('tasks', where: 'status = ?', whereArgs: [statusSelected])
+          .query(
+            'tasks',
+            where: 'status = ?',
+            whereArgs: [statusSelected],
+            orderBy: orderBySelected ?? orderBySelected,
+          )
           .then((value) {
             return value.map((e) => Todo.fromMap(e)).toList();
           });
@@ -68,7 +76,12 @@ class DatabaseHelper {
 
     if (statusSelected == 'completed') {
       List<Todo> tasks = await db
-          .query('tasks', where: 'status = ?', whereArgs: [statusSelected])
+          .query(
+            'tasks',
+            where: 'status = ?',
+            whereArgs: [statusSelected],
+            orderBy: orderBySelected ?? orderBySelected,
+          )
           .then((value) {
             return value.map((e) => Todo.fromMap(e)).toList();
           });
