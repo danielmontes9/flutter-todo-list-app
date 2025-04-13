@@ -21,7 +21,7 @@ class DatabaseHelper {
 
   Future<Database> _initDatabase() async {
     String path = join(await getDatabasesPath(), 'tasks.db');
-    print("HI! IAM HERE!");
+
     return await getDatabaseFactory().openDatabase(
       path,
       options: OpenDatabaseOptions(
