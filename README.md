@@ -1,16 +1,18 @@
-# flutter_todo_list_app
+# Flutter Todo List App
 
-A new Flutter project.
+This app was created using Flutter **3.29.2**, Dart **3.7.2** and DevTools **2.42.3**.
+It is a basic CRUD app for task, with some features like sorting, and mark tasks like pending, completed and archived. Also you can see a litle report about your progress.
 
-## Getting Started
+## Tech Stack
 
-This project is a starting point for a Flutter application.
+**Client:** Flutter **3.29.2**, Dart **3.7.2** and DevTools **2.42.3**.
 
-A few resources to get you started if this is your first Flutter project:
+## Demo
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![App Screenshot](assets/screenshots/1.png "App Screenshot 1")
+![App Screenshot](assets/screenshots/2.png "App Screenshot 2")
+![App Screenshot](assets/screenshots/1.png "App Screenshot 3")
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Author
+
+- [@danielmontes9](https://github.com/danielmontes9)
