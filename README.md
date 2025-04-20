@@ -11,7 +11,7 @@ It is a basic CRUD app for task, with some features like sorting, and mark tasks
 
 ![App Screenshot](assets/screenshots/1.png "App Screenshot 1")
 ![App Screenshot](assets/screenshots/2.png "App Screenshot 2")
-![App Screenshot](assets/screenshots/1.png "App Screenshot 3")
+![App Screenshot](assets/screenshots/3.png "App Screenshot 3")
 
 ## Author
 
